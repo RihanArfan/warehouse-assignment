@@ -3,6 +3,6 @@
   "version": "0.0.0",
   "author": "Rihan Arfan",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm run --filter customer --filter supplier dev"
   }
 }
