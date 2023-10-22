@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.0",
     "vue": "^3.3.6",
     "vue-router": "^4.2.5"
