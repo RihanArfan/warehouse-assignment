@@ -1,0 +1,12 @@
+{
+  "conventionalCommits.scopes": [
+    "customer",
+    "server",
+    "supplier",
+    "base-client"
+  ],
+  "nuxtr.defaultPackageManager": "pnpm",
+  "nuxtr.openItemsAfterCreation": true,
+  "nuxtr.vueFiles.firstTag": "script",
+  "nuxtr.vueFiles.style.addStyleTag": false
+}
