@@ -1,0 +1,10 @@
+{
+  "name": "eslint-config-client",
+  "version": "1.0.0",
+  "main": "index.cjs",
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.2.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0"
+  }
+}
