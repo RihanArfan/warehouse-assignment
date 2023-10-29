@@ -2,5 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  devServer: { port: 3000 },
+
   extends: ["../../packages/base-client"],
 });
