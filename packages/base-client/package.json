@@ -17,6 +17,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.9.0"
+    "@iconify-json/fluent": "^1.1.38",
+    "@nuxt/ui": "^2.9.0",
+    "@tauri-apps/api": "^1.5.1"
   }
 }

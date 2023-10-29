@@ -54,9 +54,15 @@ importers:
 
   packages/base-client:
     dependencies:
+      '@iconify-json/fluent':
+        specifier: ^1.1.38
+        version: 1.1.38
       '@nuxt/ui':
         specifier: ^2.9.0
         version: 2.9.0(vue@3.3.6)(webpack@5.89.0)
+      '@tauri-apps/api':
+        specifier: ^1.5.1
+        version: 1.5.1
     devDependencies:
       '@nuxt/devtools':
         specifier: latest
@@ -954,6 +960,12 @@ packages:
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: true
+
+  /@iconify-json/fluent@1.1.38:
+    resolution: {integrity: sha512-A39DgadFWTdDBVpqISLqlwtmw8FhqSLPERai8WxB6+lrRktcHipuapDMZA0EDZ/u+XasHyjfsK3+VUiusXg5CA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify-json/heroicons@1.1.13:
     resolution: {integrity: sha512-WsRTTc0qGDreszIgL9uVpPSnRlM2bXaKmK3E0zpQZloUZQX3FokDqGFgc0UbJ+8np/ta571Ty+8n78mlMhEU8w==}
@@ -1906,6 +1918,11 @@ packages:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.3.3
+    dev: false
+
+  /@tauri-apps/api@1.5.1:
+    resolution: {integrity: sha512-6unsZDOdlXTmauU3NhWhn+Cx0rODV+rvNvTdvolE5Kls5ybA6cqndQENDt1+FS0tF7ozCP66jwWoH6a5h90BrA==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
   /@tauri-apps/cli-darwin-arm64@1.5.5:
