@@ -8,7 +8,7 @@ export interface Product {
   variants: ProductVariant[];
 }
 
-interface ProductVariant {
+export interface ProductVariant {
   sku: string;
   colour: string;
   size: Size;

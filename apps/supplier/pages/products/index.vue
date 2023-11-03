@@ -52,7 +52,7 @@ const { results } = useFuse(search, products, options);
               <NuxtLink
                 :to="{
                   name: 'products-product',
-                  params: { product: result.item.id },
+                  params: { product: result.item.id.toLowerCase() },
                 }"
               >
                 <UButton

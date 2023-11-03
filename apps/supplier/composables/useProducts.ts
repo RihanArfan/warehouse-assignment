@@ -133,45 +133,45 @@ export const useProducts = () => {
     },
 
     {
-      id: "HOODIE",
-      product_name: "Hoodie",
+      id: "COAT",
+      product_name: "Coat",
       icon: {
         url: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/16cf45a09e7baaeb5bca72bfe569fe5d3ff03c83/assets/Coat/Color/coat_color.svg",
         colour: "#f0c592",
       },
       variants: [
         {
-          sku: "HOODIE-ORANGE-S",
+          sku: "COAT-ORANGE-S",
           colour: "Orange",
           size: "S",
           quantity: 10,
         },
         {
-          sku: "HOODIE-ORANGE-M",
+          sku: "COAT-ORANGE-M",
           colour: "Orange",
           size: "M",
           quantity: 5,
         },
         {
-          sku: "HOODIE-ORANGE-L",
+          sku: "COAT-ORANGE-L",
           colour: "Orange",
           size: "L",
           quantity: 3,
         },
         {
-          sku: "HOODIE-BLUE-S",
+          sku: "COAT-BLUE-S",
           colour: "Blue",
           size: "S",
           quantity: 10,
         },
         {
-          sku: "HOODIE-BLUE-M",
+          sku: "COAT-BLUE-M",
           colour: "Blue",
           size: "M",
           quantity: 5,
         },
         {
-          sku: "HOODIE-BLUE-L",
+          sku: "COAT-BLUE-L",
           colour: "Blue",
           size: "L",
           quantity: 3,
