@@ -36,7 +36,11 @@ defineShortcuts({
   <div>
     <NuxtLoadingIndicator />
 
-    <NuxtLayout name="default" title="Supplier Portal">
+    <NuxtLayout
+      name="default"
+      title="Supplier Portal"
+      :fullscreen="$route.meta.fullscreen"
+    >
       <template #sidebar>
         <UVerticalNavigation
           :links="links"
@@ -82,7 +86,6 @@ defineShortcuts({
           name="input"
           placeholder="Search product SKUs, customers and more"
           readonly
-          @click.stop.prevent="isCommandPaletteOpen = true"
           :ui="{
             color: {
               white: {
@@ -91,6 +94,7 @@ defineShortcuts({
               },
             },
           }"
+          @click.stop.prevent="isCommandPaletteOpen = true"
         />
       </template>
 

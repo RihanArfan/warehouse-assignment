@@ -1,9 +1,21 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: "Application",
   },
+  fullscreen: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const containerPadding = computed(() => {
+  if (props.fullscreen) {
+    return "p-0 lg:px-0";
+  }
+
+  return "p-5 sm:py-6 lg:px-10";
 });
 </script>
 
@@ -32,7 +44,9 @@ defineProps({
             $slots.sidebar,
         }"
       >
-        <UContainer :ui="{ padding: 'p-5 sm:py-6 lg:px-10', constrained: '' }">
+        <UContainer
+          :ui="{ padding: containerPadding, constrained: '', base: 'h-full' }"
+        >
           <slot />
         </UContainer>
       </div>
