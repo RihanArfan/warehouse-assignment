@@ -10,20 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^1.0.1",
     "eslint-config-client": "workspace:*",
-    "nuxt": "^3.8.0",
-    "vue": "^3.3.7",
+    "nuxt": "^3.8.1",
+    "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@iconify-json/fluent": "^1.1.39",
+    "@iconify-json/fluent": "^1.1.40",
     "@nuxt/ui": "^2.10.0",
     "@tauri-apps/api": "^1.5.1",
     "@vueuse/components": "^10.6.0",
-    "@vueuse/core": "^10.5.0",
-    "@vueuse/integrations": "^10.5.0",
-    "@vueuse/nuxt": "^10.5.0",
+    "@vueuse/core": "^10.6.0",
+    "@vueuse/integrations": "^10.6.0",
+    "@vueuse/nuxt": "^10.6.0",
     "fuse.js": "^7.0.0"
   }
 }
