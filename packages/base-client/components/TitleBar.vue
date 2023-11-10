@@ -19,7 +19,7 @@ defineProps({
       </h1>
     </div>
 
-    <div class="w-1/3"><slot name="center" /></div>
+    <div class="grow"><slot name="center" /></div>
 
     <div>
       <UButton
