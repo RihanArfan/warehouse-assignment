@@ -2,7 +2,7 @@
 import { useFuse } from "@vueuse/integrations/useFuse";
 import type { UseFuseOptions } from "@vueuse/integrations";
 
-import type { ProductVariant } from "~/types/types";
+import type { ProductVariant } from "base-client/types/types";
 
 definePageMeta({
   validate: async (route) => {

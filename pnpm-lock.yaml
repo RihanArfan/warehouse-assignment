@@ -39,6 +39,9 @@ importers:
       '@tauri-apps/cli':
         specifier: ^1.5.6
         version: 1.5.6
+      base-client:
+        specifier: workspace:*
+        version: link:../../packages/base-client
       eslint-config-client:
         specifier: workspace:*
         version: link:../../packages/eslint-config-client
@@ -63,6 +66,9 @@ importers:
       '@tauri-apps/api':
         specifier: ^1.5.1
         version: 1.5.1
+      '@vueuse/components':
+        specifier: ^10.6.0
+        version: 10.6.0(vue@3.3.7)
       '@vueuse/core':
         specifier: ^10.5.0
         version: 10.5.0(vue@3.3.7)
@@ -79,9 +85,6 @@ importers:
       '@nuxt/devtools':
         specifier: latest
         version: 1.0.0(nuxt@3.8.0)(vite@4.5.0)
-      '@vueuse/components':
-        specifier: ^10.6.0
-        version: 10.6.0(vue@3.3.7)
       eslint-config-client:
         specifier: workspace:*
         version: link:../eslint-config-client
@@ -2012,7 +2015,7 @@ packages:
 
   /@types/web-bluetooth@0.0.20:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
-    dev: true
+    dev: false
 
   /@typescript-eslint/eslint-plugin@6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2):
     resolution: {integrity: sha512-GosF4238Tkes2SHPQ1i8f6rMtG6zlKwMEB0abqSJ3Npvos+doIlc/ATG+vX1G9coDF3Ex78zM3heXHLyWEwLUw==}
@@ -2356,7 +2359,7 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: true
+    dev: false
 
   /@vueuse/core@10.5.0(vue@3.3.7):
     resolution: {integrity: sha512-z/tI2eSvxwLRjOhDm0h/SXAjNm8N5ld6/SC/JQs6o6kpJ6Ya50LnEL8g5hoYu005i28L0zqB5L5yAl8Jl26K3A==}
@@ -2380,7 +2383,7 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: true
+    dev: false
 
   /@vueuse/integrations@10.5.0(fuse.js@6.6.2)(vue@3.3.7):
     resolution: {integrity: sha512-fm5sXLCK0Ww3rRnzqnCQRmfjDURaI4xMsx+T+cec0ngQqHx/JgUtm8G0vRjwtonIeTBsH1Q8L3SucE+7K7upJQ==}
@@ -2498,7 +2501,7 @@ packages:
 
   /@vueuse/metadata@10.6.0:
     resolution: {integrity: sha512-mzKHkHoiK6xVz01VzQjM2l6ofUanEaofgEGPgDHcAzlvOTccPRTIdEuzneOUTYxgfm1vkDikS6rtrEw/NYlaTQ==}
-    dev: true
+    dev: false
 
   /@vueuse/nuxt@10.5.0(nuxt@3.8.0)(vue@3.3.7):
     resolution: {integrity: sha512-x1mpjwcPB5DGA3cTM29Hf3bralslrma3Jr0fXm3Js3dbUHdadC/iVMf831W+sKPjZBhiZxR0S94B8gmGlvZ/1Q==}
@@ -2534,7 +2537,7 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: true
+    dev: false
 
   /@webassemblyjs/ast@1.11.6:
     resolution: {integrity: sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q==}
@@ -7580,6 +7583,7 @@ packages:
         optional: true
     dependencies:
       vue: 3.3.7
+    dev: false
 
   /vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
