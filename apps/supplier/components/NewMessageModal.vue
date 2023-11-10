@@ -9,7 +9,7 @@ const selected = ref([]);
   <UModal v-model="isOpen">
     <UModalCard>
       <template #header>
-        <h1 class="font-semibold text-lg select-auto">New Message</h1>
+        <h1 class="font-semibold text-lg select-auto">New message</h1>
       </template>
 
       <div class="flex flex-col gap-4">
