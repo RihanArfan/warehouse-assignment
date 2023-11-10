@@ -30,6 +30,8 @@ defineShortcuts({
     },
   },
 });
+
+const broadcasts = useBroadcasts();
 </script>
 
 <template>
@@ -78,24 +80,37 @@ defineShortcuts({
       </template>
 
       <template #title-bar>
-        <UInput
-          icon="i-heroicons-magnifying-glass-20-solid"
-          size="md"
-          color="white"
-          trailing
-          name="input"
-          placeholder="Search product SKUs, customers and more"
-          readonly
-          :ui="{
-            color: {
-              white: {
-                outline:
-                  'focus:ring-1 focus:ring-inset focus:ring-gray-300 dark:focus:ring-primary-400',
+        <div class="flex justify-evenly">
+          <span />
+
+          <UInput
+            icon="i-heroicons-magnifying-glass-20-solid"
+            size="md"
+            color="white"
+            trailing
+            name="input"
+            placeholder="Search product SKUs, customers and more"
+            readonly
+            :ui="{
+              color: {
+                white: {
+                  outline:
+                    'focus:ring-1 focus:ring-inset focus:ring-gray-300 dark:focus:ring-primary-400',
+                },
               },
-            },
-          }"
-          @click.stop.prevent="isCommandPaletteOpen = true"
-        />
+            }"
+            class="w-3/5"
+            @click.stop.prevent="isCommandPaletteOpen = true"
+          />
+
+          <BroadcastPopover class="ml-5">
+            <BroadcastList :broadcasts="broadcasts" />
+
+            <template #footer>
+              <BroadcastPopoverFooter />
+            </template>
+          </BroadcastPopover>
+        </div>
       </template>
 
       <NuxtPage />

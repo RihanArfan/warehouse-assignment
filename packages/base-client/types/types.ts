@@ -16,3 +16,8 @@ export interface ProductVariant {
 }
 
 type Size = "S" | "M" | "L";
+
+export interface Broadcast {
+  date: string;
+  message: string;
+}
