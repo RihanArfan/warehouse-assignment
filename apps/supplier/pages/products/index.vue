@@ -20,19 +20,30 @@ const { results } = useFuse(search, products, options);
 
 <template>
   <div>
-    <h1 class="font-semibold text-2xl select-auto mb-2">Products</h1>
-    <h2>View your inventory of products and all SKUs</h2>
+    <div class="flex justify-between items-center mb-7">
+      <div class="grow">
+        <h1 class="font-semibold text-2xl select-auto mb-2">Products</h1>
+        <h2>View your inventory of products and all SKUs</h2>
 
-    <div class="w-1/3 mb-7 mt-5">
-      <UInput
-        v-model="search"
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="md"
-        color="white"
-        trailing
-        name="input"
-        placeholder="Search products"
-        :ui="{}"
+        <div class="w-1/3 mt-5">
+          <UInput
+            v-model="search"
+            icon="i-heroicons-magnifying-glass-20-solid"
+            size="md"
+            color="white"
+            trailing
+            name="input"
+            placeholder="Search products"
+            :ui="{}"
+          />
+        </div>
+      </div>
+
+      <UButton
+        color="primary"
+        variant="solid"
+        label="Create"
+        :ui="{ padding: { sm: 'px-8' } }"
       />
     </div>
 
@@ -42,7 +53,7 @@ const { results } = useFuse(search, products, options);
           <div class="flex gap-4 items-center justify-between">
             <div class="flex gap-4 items-center">
               <div class="bg-gray-100 rounded p-2">
-                <img :src="result.item.icon.url" class="h-8 w-8" />
+                <UIcon :name="result.item.icon.name" class="h-8 w-8" />
               </div>
 
               <h2>{{ result.item.product_name }}</h2>

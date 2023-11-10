@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   product_name: string;
   icon: {
-    url: string;
+    name: string;
     colour: string;
   };
   variants: ProductVariant[];

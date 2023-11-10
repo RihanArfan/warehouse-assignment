@@ -60,6 +60,9 @@ importers:
       '@iconify-json/fluent':
         specifier: ^1.1.40
         version: 1.1.40
+      '@iconify-json/fluent-emoji':
+        specifier: ^1.1.15
+        version: 1.1.15
       '@nuxt/ui':
         specifier: ^2.10.0
         version: 2.10.0(vue@3.3.8)(webpack@5.89.0)
@@ -957,6 +960,12 @@ packages:
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: true
+
+  /@iconify-json/fluent-emoji@1.1.15:
+    resolution: {integrity: sha512-C0HajGHrQpLsI7P8/C113xuV8vr8QTD8RG50SuEEG7OMRRA1TkuR+s5lJTuvq/9//yrzI9HMIO5dodh/hKo2sA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify-json/fluent@1.1.40:
     resolution: {integrity: sha512-cxURYtOuByAqom+Mhf3ZoVbxtAh6jdAWANzPSCPhIQrb3tMpn1B3B9p9bmJCxabiETfg0p422PlX3xlCUfg6HA==}

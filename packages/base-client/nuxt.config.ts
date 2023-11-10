@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devServer: { port: 3005 },
 
   ui: {
-    icons: ["heroicons", "fluent"],
+    icons: ["heroicons", "fluent", "fluent-emoji"],
   },
 
   colorMode: {

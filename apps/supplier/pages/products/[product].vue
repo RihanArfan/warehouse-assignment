@@ -36,7 +36,7 @@ const { results } = useFuse(search, product.value.variants, options);
   <div>
     <div class="flex justify-stretch items-center gap-10">
       <div class="bg-gray-200/50 rounded-lg p-4 w-2/12">
-        <img :src="product.icon.url" class="w-full" />
+        <UIcon :name="product.icon.name" class="text-[10vw] w-full" />
       </div>
 
       <div class="flex flex-col gap-3">
@@ -85,7 +85,7 @@ const { results } = useFuse(search, product.value.variants, options);
                 class="rounded p-2 opacity-50"
                 :style="{ backgroundColor: result.item.colour }"
               >
-                <img :src="product.icon.url" class="h-8 w-8" />
+                <UIcon :name="product.icon.name" class="h-8 w-8" />
               </div>
 
               <h2>

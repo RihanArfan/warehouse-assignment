@@ -6,7 +6,7 @@ export const useProducts = () => {
       id: "TSHIRT",
       product_name: "T-Shirt",
       icon: {
-        url: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/16cf45a09e7baaeb5bca72bfe569fe5d3ff03c83/assets/T-shirt/Color/t-shirt_color.svg",
+        name: "i-fluent-emoji-t-shirt",
         colour: "#83dc8a",
       },
       variants: [
@@ -71,7 +71,7 @@ export const useProducts = () => {
       id: "SHORTS",
       product_name: "Shorts",
       icon: {
-        url: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/16cf45a09e7baaeb5bca72bfe569fe5d3ff03c83/assets/Shorts/Color/shorts_color.svg",
+        name: "i-fluent-emoji-shorts",
         colour: "#4ee297",
       },
       variants: [
@@ -136,7 +136,7 @@ export const useProducts = () => {
       id: "COAT",
       product_name: "Coat",
       icon: {
-        url: "https://raw.githubusercontent.com/microsoft/fluentui-emoji/16cf45a09e7baaeb5bca72bfe569fe5d3ff03c83/assets/Coat/Color/coat_color.svg",
+        name: "i-fluent-emoji-coat",
         colour: "#f0c592",
       },
       variants: [
