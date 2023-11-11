@@ -29,5 +29,11 @@ export default defineNuxtConfig({
       // Tauri requires a consistent port
       strictPort: true,
     },
+
+    vue: {
+      script: {
+        defineModel: true,
+      },
+    },
   },
 });
