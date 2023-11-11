@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.0.1",
+    "@nuxt/devtools": "^1.0.2",
     "@tauri-apps/cli": "^1.5.6",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.1",
