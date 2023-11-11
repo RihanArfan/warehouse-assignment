@@ -94,8 +94,7 @@ const broadcasts = useBroadcasts();
             :ui="{
               color: {
                 white: {
-                  outline:
-                    'focus:ring-1 focus:ring-inset focus:ring-gray-300 dark:focus:ring-primary-400',
+                  outline: 'focus:border-b-[#868686] focus:border-b mb-0',
                 },
               },
             }"
