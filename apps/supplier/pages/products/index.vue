@@ -16,6 +16,8 @@ const options = computed<UseFuseOptions<Product>>(() => ({
 }));
 
 const { results } = useFuse(search, products, options);
+
+const isNewProductOpen = ref(false);
 </script>
 
 <template>
@@ -44,6 +46,7 @@ const { results } = useFuse(search, products, options);
         variant="solid"
         label="Create"
         :ui="{ padding: { sm: 'px-8' } }"
+        @click="isNewProductOpen = !isNewProductOpen"
       />
     </div>
 
@@ -78,5 +81,7 @@ const { results } = useFuse(search, products, options);
         </UCard>
       </div>
     </div>
+
+    <ProductNewModal v-model="isNewProductOpen" />
   </div>
 </template>
