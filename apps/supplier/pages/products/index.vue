@@ -7,6 +7,16 @@ import type { Product } from "base-client/types/types";
 const products = useProducts();
 const search = ref("");
 
+const productsWithQuantity = computed(() => {
+  return products.value.map((product) => {
+    const quantity = product.variants.reduce((acc, variant) => {
+      return acc + variant.quantity;
+    }, 0);
+
+    return { ...product, quantity };
+  });
+});
+
 const options = computed<UseFuseOptions<Product>>(() => ({
   fuseOptions: {
     keys: [["id"], ["name"], ["variants", "sku"]],
@@ -15,7 +25,7 @@ const options = computed<UseFuseOptions<Product>>(() => ({
   matchAllWhenSearchEmpty: true,
 }));
 
-const { results } = useFuse(search, products, options);
+const { results } = useFuse(search, productsWithQuantity, options);
 
 const isNewProductOpen = ref(false);
 </script>
@@ -57,6 +67,11 @@ const isNewProductOpen = ref(false);
         :name="result.item.name"
         :icon="{ name: result.item.icon.name }"
       >
+        <div class="flex gap-2 items-center basis-1/2">
+          <UIcon name="i-fluent-receipt-cube-24-regular" />
+          {{ result.item.quantity }}
+        </div>
+
         <div class="flex gap-2 items-center basis-1/2">
           <UIcon name="i-fluent-copy-16-regular" />
           {{ result.item.variants.length }}
