@@ -41,7 +41,7 @@ const { results } = useFuse(search, product.value.variants, options);
 
       <div class="flex flex-col gap-3">
         <h1 class="font-semibold text-4xl select-auto">
-          {{ product.product_name }}
+          {{ product.name }}
           <span class="font-normal text-2xl">
             {{ product.variants.length }} variants
           </span>
@@ -77,50 +77,40 @@ const { results } = useFuse(search, product.value.variants, options);
     </div>
 
     <div class="flex flex-col gap-2 my-5">
-      <div v-for="result in results" :key="result.item.sku">
-        <UCard :ui="{ body: { padding: 'sm:p-3' } }">
-          <div class="flex gap-4 items-center justify-between">
-            <div class="flex gap-4 items-center basis-1/4">
-              <div
-                class="rounded p-2 opacity-50"
-                :style="{ backgroundColor: result.item.colour }"
-              >
-                <UIcon :name="product.icon.name" class="h-8 w-8" />
-              </div>
+      <ProductListItem
+        v-for="result in results"
+        :key="result.item.sku"
+        :name="result.item.sku"
+        :is-name-code="true"
+        :icon="{
+          name: product.icon.name,
+          backgroundColour: result.item.colour,
+        }"
+      >
+        <div class="flex gap-2 items-center basis-1/3">
+          <UIcon name="i-fluent-receipt-cube-24-regular" />
+          {{ result.item.quantity }}
+        </div>
 
-              <h2>
-                <UKbd class="text-sm">{{ result.item.sku }}</UKbd>
-              </h2>
-            </div>
+        <div class="flex gap-2 items-center basis-1/3">
+          <UIcon name="i-fluent-paint-bucket-24-regular" />
+          {{ result.item.colour }}
+        </div>
 
-            <div class="flex gap-10 justify-evenly basis-3/6">
-              <div class="flex gap-2 items-center basis-1/3">
-                <UIcon name="i-fluent-receipt-cube-24-regular" />
-                {{ result.item.quantity }}
-              </div>
+        <div class="flex gap-2 items-center basis-1/3">
+          <UIcon name="i-fluent-slide-size-24-regular" />
+          {{ result.item.size }}
+        </div>
 
-              <div class="flex gap-2 items-center basis-1/3">
-                <UIcon name="i-fluent-paint-bucket-24-regular" />
-                {{ result.item.colour }}
-              </div>
-
-              <div class="flex gap-2 items-center basis-1/3">
-                <UIcon name="i-fluent-slide-size-24-regular" />
-                {{ result.item.size }}
-              </div>
-            </div>
-
-            <div class="mr-4">
-              <UButton
-                color="white"
-                variant="solid"
-                label="Modify"
-                :ui="{ padding: { sm: 'px-8' } }"
-              />
-            </div>
-          </div>
-        </UCard>
-      </div>
+        <template #button>
+          <UButton
+            color="white"
+            variant="solid"
+            label="Modify"
+            :ui="{ padding: { sm: 'px-8' } }"
+          />
+        </template>
+      </ProductListItem>
     </div>
   </div>
 </template>

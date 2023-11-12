@@ -9,7 +9,7 @@ const search = ref("");
 
 const options = computed<UseFuseOptions<Product>>(() => ({
   fuseOptions: {
-    keys: [["id"], ["product_name"], ["variants", "sku"]],
+    keys: [["id"], ["name"], ["variants", "sku"]],
     threshold: 0.2,
   },
   matchAllWhenSearchEmpty: true,
@@ -51,35 +51,33 @@ const isNewProductOpen = ref(false);
     </div>
 
     <div class="flex flex-col gap-2 my-5">
-      <div v-for="result in results" :key="result.item.id">
-        <UCard :ui="{ body: { padding: 'sm:p-3' } }">
-          <div class="flex gap-4 items-center justify-between">
-            <div class="flex gap-4 items-center">
-              <div class="bg-gray-100 rounded p-2">
-                <UIcon :name="result.item.icon.name" class="h-8 w-8" />
-              </div>
+      <ProductListItem
+        v-for="result in results"
+        :key="result.item.id"
+        :name="result.item.name"
+        :icon="{ name: result.item.icon.name }"
+      >
+        <div class="flex gap-2 items-center basis-1/2">
+          <UIcon name="i-fluent-copy-16-regular" />
+          {{ result.item.variants.length }}
+        </div>
 
-              <h2>{{ result.item.product_name }}</h2>
-            </div>
-
-            <div class="mr-4">
-              <NuxtLink
-                :to="{
-                  name: 'products-product',
-                  params: { product: result.item.id.toLowerCase() },
-                }"
-              >
-                <UButton
-                  color="white"
-                  variant="solid"
-                  label="Details"
-                  :ui="{ padding: { sm: 'px-8' } }"
-                />
-              </NuxtLink>
-            </div>
-          </div>
-        </UCard>
-      </div>
+        <template #button>
+          <NuxtLink
+            :to="{
+              name: 'products-product',
+              params: { product: result.item.id.toLowerCase() },
+            }"
+          >
+            <UButton
+              color="white"
+              variant="solid"
+              label="Details"
+              :ui="{ padding: { sm: 'px-8' } }"
+            />
+          </NuxtLink>
+        </template>
+      </ProductListItem>
     </div>
 
     <ProductNewModal v-model="isNewProductOpen" />

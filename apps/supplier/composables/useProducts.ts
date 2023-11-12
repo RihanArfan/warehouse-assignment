@@ -4,7 +4,7 @@ export const useProducts = () => {
   return useState<Product[]>("products", () => [
     {
       id: "TSHIRT",
-      product_name: "T-Shirt",
+      name: "T-Shirt",
       icon: {
         name: "i-fluent-emoji-t-shirt",
         colour: "#83dc8a",
@@ -69,7 +69,7 @@ export const useProducts = () => {
 
     {
       id: "SHORTS",
-      product_name: "Shorts",
+      name: "Shorts",
       icon: {
         name: "i-fluent-emoji-shorts",
         colour: "#4ee297",
@@ -134,7 +134,7 @@ export const useProducts = () => {
 
     {
       id: "COAT",
-      product_name: "Coat",
+      name: "Coat",
       icon: {
         name: "i-fluent-emoji-coat",
         colour: "#f0c592",
