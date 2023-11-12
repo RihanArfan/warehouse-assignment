@@ -21,6 +21,40 @@ const colours = computed(() => {
 
 const search = ref("");
 
+const sort = ref<(typeof sortOptions)[number]["id"]>("colour");
+const sortCurrent = computed(() => {
+  return sortOptions.find((option) => option.id === sort.value);
+});
+const sortOptions = [
+  { id: "size", name: "Size (Small to Large)" },
+  { id: "size-desc", name: "Size (Large to Small)" },
+  { id: "quantity", name: "Quantity (Low to High)" },
+  { id: "quantity-desc", name: "Quantity (High to Low)" },
+  { id: "colour", name: "Colour (A to Z)" },
+  { id: "colour-desc", name: "Colour (Z to A)" },
+] as const;
+
+const variantsSorted = computed(() => {
+  const variants = product.value.variants;
+
+  switch (sort.value) {
+    case "size":
+      return variants.sort((a, b) => a.size.localeCompare(b.size));
+    case "size-desc":
+      return variants.sort((a, b) => b.size.localeCompare(a.size));
+    case "quantity":
+      return variants.sort((a, b) => a.quantity - b.quantity);
+    case "quantity-desc":
+      return variants.sort((a, b) => b.quantity - a.quantity);
+    case "colour":
+      return variants.sort((a, b) => a.colour.localeCompare(b.colour));
+    case "colour-desc":
+      return variants.sort((a, b) => b.colour.localeCompare(a.colour));
+    default:
+      return variants;
+  }
+});
+
 const options = computed<UseFuseOptions<ProductVariant>>(() => ({
   fuseOptions: {
     keys: [["sku"], ["colour"], ["size"]],
@@ -29,7 +63,7 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
   matchAllWhenSearchEmpty: true,
 }));
 
-const { results } = useFuse(search, product.value.variants, options);
+const { results } = useFuse(search, variantsSorted, options);
 </script>
 
 <template>
@@ -63,17 +97,36 @@ const { results } = useFuse(search, product.value.variants, options);
       </div>
     </div>
 
-    <div class="w-1/3 mb-7 mt-10">
-      <UInput
-        v-model="search"
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="md"
-        color="white"
-        trailing
-        name="input"
-        placeholder="Search SKUs"
-        :ui="{}"
-      />
+    <div class="flex justify-between items-center mt-10 mb-7">
+      <div class="w-1/3">
+        <UInput
+          v-model="search"
+          icon="i-heroicons-magnifying-glass-20-solid"
+          size="md"
+          color="white"
+          trailing
+          name="input"
+          placeholder="Search SKUs"
+          :ui="{}"
+        />
+      </div>
+
+      <div class="flex gap-1 items-center text-sm text-gray-500">
+        <UIcon name="i-fluent-arrow-sort-16-regular" />
+        <p class="text-sm text-gray-500">Sort by:</p>
+
+        <USelectMenu
+          v-model="sort"
+          :options="sortOptions"
+          value-attribute="id"
+          option-attribute="name"
+          class="ml-1"
+        >
+          <template #label>
+            {{ sortCurrent!.name }}
+          </template>
+        </USelectMenu>
+      </div>
     </div>
 
     <div class="flex flex-col gap-2 my-5">
