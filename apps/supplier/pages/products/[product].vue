@@ -129,7 +129,7 @@ const { results } = useFuse(search, variantsSorted, options);
       </div>
     </div>
 
-    <div class="flex flex-col gap-2 my-5">
+    <div class="flex flex-col gap-2">
       <ProductListItem
         v-for="result in results"
         :key="result.item.sku"

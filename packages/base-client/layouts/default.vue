@@ -38,14 +38,18 @@ const containerPadding = computed(() => {
       </div>
 
       <div
-        class="grow bg-[#f9f9f9] overflow-y-auto min-h-0"
+        class="grow bg-[#f9f9f9] min-h-0"
         :class="{
           'border-l border-t border-l-[#e5e5e5] border-t-[#e5e5e5] rounded-tl-lg':
             $slots.sidebar,
         }"
       >
         <UContainer
-          :ui="{ padding: containerPadding, constrained: '', base: 'h-full' }"
+          :ui="{
+            padding: containerPadding,
+            constrained: '',
+            base: 'h-full overflow-y-auto',
+          }"
         >
           <slot />
         </UContainer>
