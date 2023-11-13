@@ -15,7 +15,7 @@ const containerPadding = computed(() => {
     return "p-0 lg:px-0";
   }
 
-  return "p-5 sm:py-6 lg:px-10";
+  return "p-5 sm:py-6 lg:px-10 sm:px-6 sm:pr-3 lg:pr-7";
 });
 </script>
 
@@ -50,6 +50,7 @@ const containerPadding = computed(() => {
             constrained: '',
             base: 'h-full overflow-y-auto',
           }"
+          style="scrollbar-gutter: stable"
         >
           <slot />
         </UContainer>
