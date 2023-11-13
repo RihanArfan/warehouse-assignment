@@ -4,7 +4,6 @@ import type { Size } from "base-client/types/types";
 const isOpen = defineModel<boolean>();
 
 const form = reactive({
-  id: "",
   quantity: "",
   colour: "",
   size: "",
@@ -24,7 +23,6 @@ const HALF_SECOND = 500;
 watchEffect(() => {
   if (!isOpen.value) {
     setTimeout(() => {
-      form.id = "";
       form.quantity = "";
       form.colour = "";
       form.size = "";
