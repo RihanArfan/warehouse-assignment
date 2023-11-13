@@ -65,6 +65,7 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
 
 const { results } = useFuse(search, variantsSorted, options);
 
+const isEditOpen = ref(false);
 const isNewVariantOpen = ref(false);
 </script>
 
@@ -106,6 +107,7 @@ const isNewVariantOpen = ref(false);
           variant="solid"
           icon="i-fluent-edit-16-regular"
           :ui="{ padding: { sm: 'px-8' } }"
+          @click="isEditOpen = !isEditOpen"
         />
 
         <UButton
