@@ -2,6 +2,17 @@
 const isOpen = defineModel<boolean>();
 
 const form = reactive({ id: "", name: "", icon: "" });
+
+const HALF_SECOND = 500;
+watchEffect(() => {
+  if (!isOpen.value) {
+    setTimeout(() => {
+      form.id = "";
+      form.name = "";
+      form.icon = "";
+    }, HALF_SECOND);
+  }
+});
 </script>
 
 <template>
@@ -42,7 +53,7 @@ const form = reactive({ id: "", name: "", icon: "" });
             </div>
           </IconPicker>
 
-          <p class="text-gray-500">
+          <p class="text-gray-500 capitalize">
             {{ form.icon.replace("i-fluent-emoji-", "").replace("-", " ") }}
           </p>
         </UFormGroup>
