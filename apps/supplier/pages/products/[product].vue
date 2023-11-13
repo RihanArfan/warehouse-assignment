@@ -64,36 +64,56 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
 }));
 
 const { results } = useFuse(search, variantsSorted, options);
+
+const isNewVariantOpen = ref(false);
 </script>
 
 <template>
   <div>
-    <div class="flex justify-stretch items-center gap-10">
-      <div class="bg-gray-200/50 rounded-lg p-4 w-2/12">
-        <UIcon :name="product.icon.name" class="text-[10vw] w-full" />
-      </div>
+    <div class="flex justify-between items-center">
+      <div class="flex justify-stretch items-center gap-10 grow">
+        <div class="bg-gray-200/50 rounded-lg p-4 w-2/12">
+          <UIcon :name="product.icon.name" class="text-[10vw] w-full" />
+        </div>
 
-      <div class="flex flex-col gap-3">
-        <h1 class="font-semibold text-4xl select-auto">
-          {{ product.name }}
-          <span class="font-normal text-2xl">
-            {{ product.variants.length }} variants
-          </span>
-        </h1>
+        <div class="flex flex-col gap-3">
+          <h1 class="font-semibold text-4xl select-auto">
+            {{ product.name }}
+            <span class="font-normal text-2xl">
+              {{ product.variants.length }} variants
+            </span>
+          </h1>
 
-        <div class="flex">
-          <div
-            v-for="(colour, i) in colours"
-            :key="colour"
-            class="bg-white rounded-full relative"
-            :class="{ '-ml-2': i !== 0 }"
-          >
+          <div class="flex">
             <div
-              class="w-8 h-8 rounded-full opacity-50"
-              :style="{ backgroundColor: colour }"
-            />
+              v-for="(colour, i) in colours"
+              :key="colour"
+              class="bg-white rounded-full relative"
+              :class="{ '-ml-2': i !== 0 }"
+            >
+              <div
+                class="w-8 h-8 rounded-full opacity-50"
+                :style="{ backgroundColor: colour }"
+              />
+            </div>
           </div>
         </div>
+      </div>
+
+      <div class="flex gap-2">
+        <UButton
+          color="white"
+          variant="solid"
+          icon="i-fluent-edit-16-regular"
+          :ui="{ padding: { sm: 'px-8' } }"
+        />
+
+        <UButton
+          color="primary"
+          variant="solid"
+          label="Create variant"
+          @click="isNewVariantOpen = !isNewVariantOpen"
+        />
       </div>
     </div>
 
@@ -165,5 +185,7 @@ const { results } = useFuse(search, variantsSorted, options);
         </template>
       </ProductListItem>
     </div>
+
+    <ProductVariantNewModal v-model="isNewVariantOpen" />
   </div>
 </template>

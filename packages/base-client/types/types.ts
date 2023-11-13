@@ -15,7 +15,7 @@ export interface ProductVariant {
   quantity: number;
 }
 
-type Size = "S" | "M" | "L";
+export type Size = "S" | "M" | "L";
 
 export interface Broadcast {
   date: string;
