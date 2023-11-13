@@ -178,16 +178,29 @@ const isNewVariantOpen = ref(false);
         </div>
 
         <template #button>
-          <UButton
-            color="white"
-            variant="solid"
-            label="Modify"
-            :ui="{ padding: { sm: 'px-8' } }"
-          />
+          <NuxtLink
+            :to="{
+              name: 'products-product-variants-variant',
+              params: {
+                product: product.id.toLowerCase(),
+                variant: result.item.sku.toLowerCase(),
+              },
+            }"
+          >
+            <UButton
+              color="white"
+              variant="solid"
+              label="Modify"
+              :ui="{ padding: { sm: 'px-8' } }"
+            />
+          </NuxtLink>
         </template>
       </ProductListItem>
     </div>
 
+    <ProductEditModal v-model="isEditOpen" :product="product" />
     <ProductVariantNewModal v-model="isNewVariantOpen" />
+
+    <NuxtPage />
   </div>
 </template>
