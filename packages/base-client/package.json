@@ -13,7 +13,7 @@
     "@nuxt/devtools": "^1.0.2",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.1",
-    "nuxt-icon": "^0.6.5",
+    "nuxt-icon": "^0.6.6",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
@@ -22,10 +22,10 @@
     "@iconify-json/fluent-emoji": "^1.1.15",
     "@nuxt/ui": "^2.10.0",
     "@tauri-apps/api": "^1.5.1",
-    "@vueuse/components": "^10.6.0",
-    "@vueuse/core": "^10.6.0",
-    "@vueuse/integrations": "^10.6.0",
-    "@vueuse/nuxt": "^10.6.0",
+    "@vueuse/components": "^10.6.1",
+    "@vueuse/core": "^10.6.1",
+    "@vueuse/integrations": "^10.6.1",
+    "@vueuse/nuxt": "^10.6.1",
     "fuse.js": "^7.0.0"
   }
 }
