@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const props = defineProps({
-  title: {
-    type: String,
-    default: "Application",
-  },
-  fullscreen: {
-    type: Boolean,
-    default: false,
-  },
+interface Props {
+  title?: string;
+  icon?: string;
+  fullscreen?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: "Application",
+  fullscreen: false,
 });
 
 const containerPadding = computed(() => {

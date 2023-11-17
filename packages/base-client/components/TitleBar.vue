@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { appWindow } from "@tauri-apps/api/window";
 
-defineProps({
-  title: {
-    type: String,
-    default: "Application",
-  },
+interface Props {
+  title?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  title: "Application",
 });
 </script>
 
