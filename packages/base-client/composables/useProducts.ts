@@ -1,4 +1,4 @@
-import type { Product } from "base-client/types/types";
+import type { Product } from "../types/types";
 
 export const useProducts = () => {
   return useState<Product[]>("products", () => [
