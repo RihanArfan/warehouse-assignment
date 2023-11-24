@@ -40,7 +40,7 @@ const form = reactive({
           label="Product Icon"
           :ui="{ container: 'flex items-center gap-3' }"
         >
-          <IconPicker v-model="form.icon">
+          <LazyIconPicker v-model="form.icon">
             <div
               class="rounded p-2 flex h-12 w-12 shadow-sm bg-[#fbfbfb] hover:bg-[#f6f6f6] active:bg-white text-gray-900 ring-0 active:ring-0 border border-b border-[#e5e5e5] active:border-[#e5e5e5] border-b-[#868686] active:border-b-primary-500 active:border-b-2 mb-[4px]"
             >
@@ -51,7 +51,7 @@ const form = reactive({
               />
               <Icon v-else :name="form.icon" class="h-8 w-8" />
             </div>
-          </IconPicker>
+          </LazyIconPicker>
 
           <p class="text-gray-500 capitalize">
             {{ form.icon.replace("i-fluent-emoji-", "").replace("-", " ") }}

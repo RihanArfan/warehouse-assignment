@@ -118,7 +118,7 @@ const broadcasts = useBroadcasts();
 
       <NuxtPage />
 
-      <UModal v-model="isCommandPaletteOpen"><CommandPalette /></UModal>
+      <UModal v-model="isCommandPaletteOpen"><LazyCommandPalette /></UModal>
     </NuxtLayout>
 
     <UNotifications />
