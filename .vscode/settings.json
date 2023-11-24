@@ -8,5 +8,6 @@
   "nuxtr.defaultPackageManager": "pnpm",
   "nuxtr.openItemsAfterCreation": true,
   "nuxtr.vueFiles.firstTag": "script",
-  "nuxtr.vueFiles.style.addStyleTag": false
+  "nuxtr.vueFiles.style.addStyleTag": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
