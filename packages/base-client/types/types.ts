@@ -21,3 +21,13 @@ export interface Broadcast {
   date: string;
   message: string;
 }
+
+export interface Supplier {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+
+  products: Product[];
+  broadcasts: Broadcast[];
+}
