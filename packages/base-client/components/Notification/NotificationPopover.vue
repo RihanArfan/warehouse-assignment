@@ -1,9 +1,21 @@
+<script setup lang="ts">
+interface Props {
+  title?: string;
+  icon?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  title: "Alerts",
+  icon: "i-fluent-alert-16-regular",
+});
+</script>
+
 <template>
   <UPopover :popper="{ arrow: true }">
     <UButton
       color="white"
       size="md"
-      icon="i-fluent-megaphone-loud-24-regular"
+      :icon="icon"
       :ui="{ rounded: 'rounded-full' }"
     />
 
@@ -25,7 +37,7 @@
         }"
       >
         <template #header>
-          <h1 class="font-semibold text-lg select-auto">Broadcasts</h1>
+          <h1 class="font-semibold text-lg select-auto">{{ title }}</h1>
         </template>
 
         <slot />

@@ -102,13 +102,17 @@ const broadcasts = useBroadcasts();
             @click.stop.prevent="isCommandPaletteOpen = true"
           />
 
-          <BroadcastPopover class="ml-5">
+          <NotificationPopover
+            title="Broadcasts"
+            icon="i-fluent-megaphone-loud-24-regular"
+            class="ml-5"
+          >
             <BroadcastList :broadcasts="broadcasts" />
 
             <template #footer>
               <BroadcastPopoverFooter />
             </template>
-          </BroadcastPopover>
+          </NotificationPopover>
         </div>
       </template>
 
