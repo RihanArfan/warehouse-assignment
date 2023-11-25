@@ -21,6 +21,8 @@ const containerPadding = computed(() => {
 
 <template>
   <div class="h-screen flex flex-col select-none bg-[#f3f3f3]">
+    <Body class="overscroll-none" />
+
     <TitleBar
       :title="title"
       :class="{
@@ -48,7 +50,7 @@ const containerPadding = computed(() => {
           :ui="{
             padding: containerPadding,
             constrained: '',
-            base: 'h-full overflow-y-auto',
+            base: 'h-full overflow-y-auto overscroll-contain',
           }"
           style="scrollbar-gutter: stable"
         >
