@@ -24,6 +24,10 @@ export default defineAppConfig({
             "shadow-none bg-blue-500 hover:bg-blue-500/90 border-b-[1.5px] border-blue-900 active:border-blue-500 text-white",
         },
       },
+      gap: {
+        sm: "gap-x-2",
+        md: "gap-x-3",
+      },
     },
     modal: {
       width: "sm:max-w-sm",
