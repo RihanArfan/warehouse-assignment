@@ -12,13 +12,17 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <header class="flex justify-between items-center" data-tauri-drag-region>
-    <div class="flex my-3.5 mx-4 gap-3 items-center">
-      <img src="../public/icon.png" alt="icon" class="h-5 w-5" />
+    <NuxtLink to="/">
+      <div
+        class="flex my-1.5 mx-4 gap-3 items-center hover:bg-gray-200/75 rounded-lg p-2 transition-colors"
+      >
+        <img src="../public/icon.png" alt="icon" class="h-5 w-5" />
 
-      <h1 class="text-[0.8rem] text-zinc-800 font-medium">
-        {{ title }}
-      </h1>
-    </div>
+        <h1 class="text-[0.8rem] text-zinc-800 font-medium">
+          {{ title }}
+        </h1>
+      </div>
+    </NuxtLink>
 
     <div class="grow"><slot name="center" /></div>
 
