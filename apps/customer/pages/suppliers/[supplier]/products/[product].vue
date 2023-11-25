@@ -6,12 +6,14 @@ import type { ProductVariant } from "base-client/types/types";
 
 definePageMeta({
   validate: async (route) => {
+    const supplier = useSupplier(route.params.supplier as string);
     const product = useProduct(route.params.product as string);
-    return !!product.value;
+    return !!supplier.value && !!product.value;
   },
 });
 
 const route = useRoute();
+const supplier = useSupplier(route.params.supplier as string);
 const product = useProduct(route.params.product as string);
 
 const colours = computed(() => {
@@ -65,8 +67,7 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
 
 const { results } = useFuse(search, variantsSorted, options);
 
-const isEditOpen = ref(false);
-const isNewVariantOpen = ref(false);
+const isSubscribed = ref(false);
 </script>
 
 <template>
@@ -77,8 +78,10 @@ const isNewVariantOpen = ref(false);
           <UIcon :name="product.icon.name" class="text-9xl" />
         </div>
 
-        <div class="flex flex-col gap-3">
-          <h1 class="font-semibold text-4xl select-auto">
+        <div>
+          <SupplierBadge v-bind="supplier" />
+
+          <h1 class="font-semibold text-4xl select-auto mb-3 mt-2">
             {{ product.name }}
             <span class="font-normal text-2xl">
               {{ product.variants.length }} variants
@@ -103,18 +106,22 @@ const isNewVariantOpen = ref(false);
 
       <div class="flex gap-2">
         <UButton
-          color="white"
-          variant="solid"
-          icon="i-fluent-edit-16-regular"
-          :ui="{ padding: { sm: 'px-8' } }"
-          @click="isEditOpen = !isEditOpen"
-        />
-
-        <UButton
+          v-if="!isSubscribed"
           color="primary"
           variant="solid"
-          label="Create variant"
-          @click="isNewVariantOpen = !isNewVariantOpen"
+          icon="i-fluent-alert-16-regular"
+          label="Subscribe to updates"
+          :ui="{ padding: { sm: 'pr-4 pl-3' } }"
+          @click="isSubscribed = !isSubscribed"
+        />
+        <UButton
+          v-else
+          color="white"
+          variant="solid"
+          icon="i-fluent-checkmark-16-regular"
+          label="Subscribed to updates"
+          :ui="{ padding: { sm: 'pr-4 pl-3' } }"
+          @click="isSubscribed = !isSubscribed"
         />
       </div>
     </div>
@@ -178,7 +185,7 @@ const isNewVariantOpen = ref(false);
         </div>
 
         <template #button>
-          <NuxtLink
+          <!-- <NuxtLink
             :to="{
               name: 'products-product-variants-variant',
               params: {
@@ -186,20 +193,17 @@ const isNewVariantOpen = ref(false);
                 variant: result.item.sku.toLowerCase(),
               },
             }"
-          >
-            <UButton
-              color="white"
-              variant="solid"
-              label="Modify"
-              :ui="{ padding: { sm: 'px-8' } }"
-            />
-          </NuxtLink>
+          > -->
+          <UButton
+            color="white"
+            variant="solid"
+            label="Inquire"
+            :ui="{ padding: { sm: 'px-8' } }"
+          />
+          <!-- </NuxtLink> -->
         </template>
       </ProductListItem>
     </div>
-
-    <LazyProductEditModal v-model="isEditOpen" :product="product" />
-    <LazyProductVariantNewModal v-model="isNewVariantOpen" />
 
     <NuxtPage />
   </div>
