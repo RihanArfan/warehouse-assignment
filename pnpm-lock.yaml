@@ -61,11 +61,11 @@ importers:
   packages/base-client:
     dependencies:
       '@iconify-json/fluent':
-        specifier: ^1.1.41
-        version: 1.1.41
+        specifier: ^1.1.42
+        version: 1.1.42
       '@iconify-json/fluent-emoji':
-        specifier: ^1.1.15
-        version: 1.1.15
+        specifier: ^1.1.16
+        version: 1.1.16
       '@nuxt/ui':
         specifier: ^2.11.0
         version: 2.11.0(nuxt@3.8.2)(vite@4.5.0)(vue@3.3.9)
@@ -928,14 +928,14 @@ packages:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: true
 
-  /@iconify-json/fluent-emoji@1.1.15:
-    resolution: {integrity: sha512-C0HajGHrQpLsI7P8/C113xuV8vr8QTD8RG50SuEEG7OMRRA1TkuR+s5lJTuvq/9//yrzI9HMIO5dodh/hKo2sA==}
+  /@iconify-json/fluent-emoji@1.1.16:
+    resolution: {integrity: sha512-rZKiQklyXLB9VI08EUsq2sTb2kGLRpIi6YTPQejtuUllcWE4KgHMSjzaxmeB8vf54TuuRQ22oaLWtRPCvOnQDg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify-json/fluent@1.1.41:
-    resolution: {integrity: sha512-Wt3PyWAfpIgf3n0gt99BcnAn5cn4lAefQkib0sDJIObI329l8Jfd/0LctlL/1h/ZCUeylQQCDjyQSsuypUhaJw==}
+  /@iconify-json/fluent@1.1.42:
+    resolution: {integrity: sha512-QftfNi1Q0bNclT+MRSutRAlo1qQROnVqNEsc4w+G3xwmnOHai2zlbAxfrHKXCoP8LBOVxJ1nbfZEgep0IGnKuw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
