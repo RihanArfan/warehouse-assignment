@@ -86,12 +86,22 @@ const { results } = useFuse(search, productsSorted, options);
       </div>
 
       <div class="flex gap-2">
-        <UButton
-          color="white"
-          variant="solid"
-          icon="i-fluent-megaphone-loud-16-regular"
-          :ui="{ padding: { sm: 'px-8' } }"
-        />
+        <NotificationPopover
+          title="Broadcasts"
+          icon="i-fluent-megaphone-loud-24-regular"
+          class="ml-5"
+        >
+          <template #button>
+            <UButton
+              color="white"
+              variant="solid"
+              icon="i-fluent-megaphone-loud-16-regular"
+              :ui="{ padding: { sm: 'px-8' } }"
+            />
+          </template>
+
+          <BroadcastList :broadcasts="supplier.broadcasts" />
+        </NotificationPopover>
 
         <UButton color="primary" variant="solid" label="Send message" />
       </div>

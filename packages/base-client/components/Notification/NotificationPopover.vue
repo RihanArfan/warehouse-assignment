@@ -12,13 +12,14 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <UPopover :popper="{ arrow: true }">
-    <UButton
-      color="white"
-      size="md"
-      :icon="icon"
-      :ui="{ rounded: 'rounded-full' }"
-    />
-
+    <slot name="button">
+      <UButton
+        color="white"
+        size="md"
+        :icon="icon"
+        :ui="{ rounded: 'rounded-full' }"
+      />
+    </slot>
     <template #panel>
       <UCard
         :ui="{

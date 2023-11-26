@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Broadcast } from "base-client/types/types";
+import type { Broadcast } from "../../types/types";
 
 defineProps<{
   broadcasts: Broadcast[];
