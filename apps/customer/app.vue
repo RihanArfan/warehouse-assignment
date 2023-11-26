@@ -53,7 +53,7 @@ defineShortcuts({
             />
 
             <NotificationPopover class="ml-5">
-              <BroadcastList :broadcasts="broadcasts" />
+              <AlertList />
             </NotificationPopover>
           </div>
         </div>
