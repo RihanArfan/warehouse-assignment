@@ -3,7 +3,8 @@
     "customer",
     "server",
     "supplier",
-    "base-client"
+    "base-client",
+    "types"
   ],
   "nuxtr.defaultPackageManager": "pnpm",
   "nuxtr.openItemsAfterCreation": true,

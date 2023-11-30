@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Size } from "base-client/types/types";
+import type { Size } from "types";
 
 const isOpen = defineModel<boolean>();
 

@@ -1,4 +1,4 @@
-import type { Supplier } from "base-client/types/types";
+import type { Supplier } from "types";
 
 export const useSuppliers = () => {
   return useState<Supplier[]>("suppliers", () => [

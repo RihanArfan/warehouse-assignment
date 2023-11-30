@@ -1,0 +1,6 @@
+{
+  "name": "types",
+  "private": true,
+  "type": "module",
+  "main": "types.ts"
+}

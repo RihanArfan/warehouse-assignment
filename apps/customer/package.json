@@ -12,9 +12,9 @@
   "devDependencies": {
     "@nuxt/devtools": "^1.0.3",
     "@tauri-apps/cli": "^1.5.6",
-    "base-client": "workspace:*",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.2",
+    "types": "workspace:*",
     "vue": "^3.3.9",
     "vue-router": "^4.2.5"
   }

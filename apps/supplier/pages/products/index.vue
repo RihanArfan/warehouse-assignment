@@ -2,7 +2,7 @@
 import { useFuse } from "@vueuse/integrations/useFuse";
 import type { UseFuseOptions } from "@vueuse/integrations";
 
-import type { Product } from "base-client/types/types";
+import type { Product } from "types";
 
 const products = useProducts();
 const search = ref("");

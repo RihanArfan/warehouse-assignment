@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Supplier } from "base-client/types/types";
+import type { Supplier } from "types";
 
 defineProps<Pick<Supplier, "id" | "name" | "icon">>();
 </script>
