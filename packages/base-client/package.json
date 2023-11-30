@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.0.3",
+    "@nuxt/devtools": "^1.0.4",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.6",
@@ -19,8 +19,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@iconify-json/fluent": "^1.1.42",
-    "@iconify-json/fluent-emoji": "^1.1.16",
+    "@iconify-json/fluent": "^1.1.43",
+    "@iconify-json/fluent-emoji": "^1.1.17",
     "@nuxt/ui": "^2.11.0",
     "@tauri-apps/api": "^1.5.1",
     "@vueuse/components": "^10.6.1",
