@@ -37,7 +37,7 @@ const suppliers = useSuppliers();
         v-for="supplier in suppliers"
         :key="supplier.id"
         :name="supplier.name"
-        :icon="{ name: supplier.icon }"
+        :icon="supplier.icon"
       >
         <template #button>
           <NuxtLink

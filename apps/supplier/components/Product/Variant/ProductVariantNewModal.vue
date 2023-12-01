@@ -9,11 +9,11 @@ const form = reactive({
   size: "",
 });
 
-const sizes: ReadonlyArray<{ id: Size; value: string }> = [
+const sizes: { id: Size; value: string }[] = [
   { id: "S", value: "Small" },
   { id: "M", value: "Medium" },
   { id: "L", value: "Large" },
-] as const;
+];
 
 const sizeCurrent = computed(() => {
   return sizes.find((option) => option.id === form.size);

@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import type { Size } from "types";
 
-const route = useRoute();
+const route = useRoute("products-product-variants-variant");
 
 const isOpen = ref(true);
 watchEffect(() => {
   !isOpen.value && setTimeout(() => navigateTo("/products/:product()"), 200);
 });
 
-const variant = useProductVariant(
-  route.params.product as string,
-  route.params.variant as string
-);
+const variant = useProductVariant(route.params.product, route.params.variant);
 
 if (!variant.value) {
   throw createError({
@@ -26,11 +23,11 @@ const form = reactive({
   size: variant.value.size,
 });
 
-const sizes: ReadonlyArray<{ id: Size; value: string }> = [
+const sizes: { id: Size; value: string }[] = [
   { id: "S", value: "Small" },
   { id: "M", value: "Medium" },
   { id: "L", value: "Large" },
-] as const;
+];
 
 const sizeCurrent = computed(() => {
   return sizes.find((option) => option.id === form.size);

@@ -16,7 +16,7 @@ const sortOptions = [
   { id: "name-desc", name: "Name (Z to A)" },
   { id: "quantity", name: "Quantity (Low to High)" },
   { id: "quantity-desc", name: "Quantity (High to Low)" },
-] as const;
+];
 
 const productsWithQuantity = computed(() => {
   return products.value.map((product) => {

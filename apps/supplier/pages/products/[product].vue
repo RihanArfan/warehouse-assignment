@@ -6,13 +6,14 @@ import type { ProductVariant } from "types";
 
 definePageMeta({
   validate: async (route) => {
-    const product = useProduct(route.params.product as string);
+    // @ts-expect-error
+    const product = useProduct(route.params.product);
     return !!product.value;
   },
 });
 
-const route = useRoute();
-const product = useProduct(route.params.product as string);
+const route = useRoute("products-product");
+const product = useProduct(route.params.product);
 
 const colours = computed(() => {
   const colours = product.value?.variants.map((variant) => variant.colour);

@@ -6,15 +6,16 @@ import type { Product } from "types";
 
 definePageMeta({
   validate: async (route) => {
-    const supplier = useSupplier(route.params.supplier as string);
+    // @ts-expect-error
+    const supplier = useSupplier(route.params.supplier);
     return !!supplier.value;
   },
 });
 
-const route = useRoute();
+const route = useRoute("suppliers-supplier");
 const search = ref("");
 
-const supplier = useSupplier(route.params.supplier as string);
+const supplier = useSupplier(route.params.supplier);
 const products = computed(() => supplier.value?.products);
 
 const sort = ref<(typeof sortOptions)[number]["id"]>("name");
@@ -26,7 +27,7 @@ const sortOptions = [
   { id: "name-desc", name: "Name (Z to A)" },
   { id: "quantity", name: "Quantity (Low to High)" },
   { id: "quantity-desc", name: "Quantity (High to Low)" },
-] as const;
+];
 
 const productsWithQuantity = computed(() => {
   return products.value.map((product) => {

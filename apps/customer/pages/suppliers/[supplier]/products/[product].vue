@@ -6,15 +6,17 @@ import type { ProductVariant } from "types";
 
 definePageMeta({
   validate: async (route) => {
-    const supplier = useSupplier(route.params.supplier as string);
-    const product = useProduct(route.params.product as string);
+    // @ts-expect-error
+    const supplier = useSupplier(route.params.supplier);
+    // @ts-expect-error
+    const product = useProduct(route.params.product);
     return !!supplier.value && !!product.value;
   },
 });
 
-const route = useRoute();
-const supplier = useSupplier(route.params.supplier as string);
-const product = useProduct(route.params.product as string);
+const route = useRoute("suppliers-supplier-products-product");
+const supplier = useSupplier(route.params.supplier);
+const product = useProduct(route.params.product);
 
 const colours = computed(() => {
   const colours = product.value?.variants.map((variant) => variant.colour);
