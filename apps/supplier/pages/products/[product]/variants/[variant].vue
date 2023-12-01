@@ -2,15 +2,10 @@
 import type { Size } from "types";
 
 const route = useRoute();
-const isOpen = ref(true);
 
+const isOpen = ref(true);
 watchEffect(() => {
-  if (!isOpen.value) {
-    navigateTo({
-      name: "products-product",
-      params: { product: route.params.product },
-    });
-  }
+  !isOpen.value && setTimeout(() => navigateTo("/products/:product()"), 200);
 });
 
 const variant = useProductVariant(
