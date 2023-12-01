@@ -1,6 +1,6 @@
 <script setup>
-const router = useRouter();
 const commandPaletteRef = ref();
+
 const customers = [
   {
     id: "rihanarfan",
@@ -9,7 +9,9 @@ const customers = [
     avatar: { src: "https://github.com/RihanArfan.png" },
   },
 ];
+
 const actions = [];
+
 const groups = computed(() =>
   [
     commandPaletteRef.value?.query
@@ -28,13 +30,14 @@ const groups = computed(() =>
     },
   ].filter(Boolean)
 );
+
 function onSelect(option) {
   if (option.click) {
     option.click();
   } else if (option.to) {
-    router.push(option.to);
+    navigateTo(option.to);
   } else if (option.href) {
-    window.open(option.href, "_blank");
+    navigateTo(option.href, { open: { target: "_blank" } });
   }
 }
 </script>
