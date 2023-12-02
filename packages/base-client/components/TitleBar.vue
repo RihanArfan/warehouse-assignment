@@ -8,6 +8,11 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   title: "Application",
 });
+
+const isMaximized = ref(await appWindow.isMaximized());
+await appWindow.onResized(async () => {
+  isMaximized.value = await appWindow.isMaximized();
+});
 </script>
 
 <template>
@@ -41,13 +46,25 @@ withDefaults(defineProps<Props>(), {
       />
 
       <UButton
-        icon="i-fluent-restore-16-regular"
+        v-if="!isMaximized"
+        icon="i-fluent-maximize-16-regular"
         size="lg"
         color="gray"
         variant="ghost"
         :ui="{ rounded: '', icon: { size: { lg: 'h-4 w-6 my-1.5' } } }"
         class="hover:bg-[#e9e9e9]"
         @click="appWindow.maximize()"
+      />
+
+      <UButton
+        v-else
+        icon="i-fluent-restore-16-regular"
+        size="lg"
+        color="gray"
+        variant="ghost"
+        :ui="{ rounded: '', icon: { size: { lg: 'h-4 w-6 my-1.5' } } }"
+        class="hover:bg-[#e9e9e9]"
+        @click="appWindow.unmaximize()"
       />
 
       <UButton
