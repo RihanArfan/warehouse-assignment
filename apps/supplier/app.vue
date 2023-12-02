@@ -80,7 +80,7 @@ const broadcasts = useBroadcasts();
       </template>
 
       <template #title-bar>
-        <div class="flex justify-evenly">
+        <div class="flex justify-evenly" data-tauri-drag-region>
           <span />
 
           <UInput

@@ -21,7 +21,7 @@ defineShortcuts({
       :fullscreen="$route.meta.fullscreen"
     >
       <template #title-bar>
-        <div class="flex justify-between pl-0">
+        <div class="flex justify-between pl-0" data-tauri-drag-region>
           <UButton
             color="white"
             variant="ghost"
@@ -32,7 +32,7 @@ defineShortcuts({
             @click="$router.back()"
           />
 
-          <div class="flex justify-evenly grow">
+          <div class="flex justify-evenly grow" data-tauri-drag-region>
             <UInput
               icon="i-heroicons-magnifying-glass-20-solid"
               size="md"

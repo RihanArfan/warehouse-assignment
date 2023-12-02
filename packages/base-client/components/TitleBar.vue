@@ -29,7 +29,9 @@ await appWindow.onResized(async () => {
       </div>
     </NuxtLink>
 
-    <div class="grow"><slot name="center" /></div>
+    <div class="grow" data-tauri-drag-region>
+      <slot name="center" />
+    </div>
 
     <div>
       <UButton
