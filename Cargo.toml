@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "apps/customer/src-tauri",
+    "apps/supplier/src-tauri",
+]

@@ -5,6 +5,7 @@
     "vivaxy.vscode-conventional-commits",
     "bradlc.vscode-tailwindcss",
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "rust-lang.rust-analyzer"
   ]
 }
