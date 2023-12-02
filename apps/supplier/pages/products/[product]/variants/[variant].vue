@@ -5,7 +5,16 @@ const route = useRoute("products-product-variants-variant");
 
 const isOpen = ref(true);
 watchEffect(() => {
-  !isOpen.value && setTimeout(() => navigateTo("/products/:product()"), 200);
+  !isOpen.value &&
+    setTimeout(
+      () =>
+        // TODO: use navigateTo("/products/:product()") - not working currently
+        navigateTo({
+          name: "products-product",
+          params: { product: route.params.product },
+        }),
+      200
+    );
 });
 
 const variant = useProductVariant(route.params.product, route.params.variant);
