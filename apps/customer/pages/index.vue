@@ -8,8 +8,7 @@ const suppliers = useSuppliers();
       <h1
         class="font-semibold text-3xl select-auto mb-2 flex items-center gap-2"
       >
-        Welcome back
-        <UIcon name="i-fluent-emoji-waving-hand" />
+        Home
       </h1>
     </div>
 
