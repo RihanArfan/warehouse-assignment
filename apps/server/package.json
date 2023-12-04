@@ -1,7 +1,10 @@
 {
   "name": "server",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "deno run --allow-read --allow-net --allow-env --unstable --watch main.ts",
+    "start": "deno run --allow-read --allow-net --allow-env --unstable main.ts",
+    "compile": "deno compile --allow-read --allow-net --allow-env --unstable --output server main.ts"
   }
 }
