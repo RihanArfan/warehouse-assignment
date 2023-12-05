@@ -28,6 +28,22 @@ export interface Supplier {
   description: string;
   icon: string;
 
+  users: User[];
   products: Product[];
   broadcasts: Broadcast[];
+}
+
+export interface Customer {
+  id: string;
+  name: string;
+  users: User[];
+
+  suppliers: Supplier["id"][];
+  subscribedProducts: Product["id"][];
+}
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
 }
