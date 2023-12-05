@@ -43,7 +43,7 @@ export function authenticate<T extends TypeName>(
 /**
  * Adds users connection to the supplier/customer object
  */
-export function onAuthenticated(id: string, conn: Deno.Conn, type: TypeName) {
+export function storeConnection(id: string, conn: Deno.Conn, type: TypeName) {
   const items = type === "supplier" ? suppliers : customers;
 
   const item = items.find((item) => item.id === id);
@@ -56,7 +56,7 @@ export function onAuthenticated(id: string, conn: Deno.Conn, type: TypeName) {
 /**
  * Removes users connection from the supplier/customer object
  */
-export function onDisconnected(id: string, conn: Deno.Conn, type: TypeName) {
+export function unstoreConnection(id: string, conn: Deno.Conn, type: TypeName) {
   const items = type === "supplier" ? suppliers : customers;
 
   const item = items.find((item) => item.id === id);

@@ -1,7 +1,7 @@
 import "https://deno.land/std@0.208.0/dotenv/load.ts";
 
-import { handler as customerHandler } from "./customer/customer.ts";
-import { handler as supplierHandler } from "./supplier/supplier.ts";
+import { handler as customerHandler } from "./handler/customerHandler.ts";
+import { handler as supplierHandler } from "./handler/supplierHandler.ts";
 
 console.log("server starting...");
 
