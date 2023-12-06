@@ -13,7 +13,6 @@
     "@nuxt/devtools": "^1.0.4",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.2",
-    "nuxt-icon": "^0.6.6",
     "types": "workspace:*",
     "vue": "^3.3.9",
     "vue-router": "^4.2.5"

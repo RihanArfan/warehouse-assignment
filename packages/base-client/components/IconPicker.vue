@@ -134,10 +134,11 @@ const onClick = (icon: string, close: Function) => {
                 @click="() => onClick(icon, close)"
               >
                 <UTooltip :text="icon">
-                  <Icon
+                  <UIcon
                     :name="`i-fluent-emoji-${icon}`"
                     class="h-7 w-7"
                     :title="icon"
+                    dynamic
                   />
                 </UTooltip>
               </UButton>

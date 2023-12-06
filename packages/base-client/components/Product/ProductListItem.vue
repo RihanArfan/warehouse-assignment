@@ -18,7 +18,7 @@ defineProps<{
           :class="{ 'opacity-50': !!icon.backgroundColour }"
           :style="{ backgroundColor: icon.backgroundColour }"
         >
-          <UIcon :name="icon.name" class="h-8 w-8" />
+          <UIcon :name="icon.name" class="h-8 w-8" dynamic />
         </div>
 
         <h2>
