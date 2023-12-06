@@ -84,6 +84,11 @@ export class BaseHandler {
           code: "UNAUTHENTICATED",
           message: "authenticate first",
         });
+
+        console.debug(
+          `[${this.type}] unauthorised access request to '${rq.action}' (socket ${this.connection.rid})`
+        );
+
         continue;
       }
 
