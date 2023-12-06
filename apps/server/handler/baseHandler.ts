@@ -12,7 +12,7 @@ export class BaseHandler {
 
   constructor(protected connection: Deno.Conn, type: "supplier" | "customer") {
     this.type = type;
-    console.log(`[${type}] client connected (${connection.rid})`);
+    console.debug(`[${type}] new connection (socket ${connection.rid})`);
   }
 
   disconnect() {
@@ -112,6 +112,10 @@ export class BaseHandler {
       this.id = item.id;
       storeConnection(this.id, this.connection, this.type);
       await this.send({ code: "AUTH_SUCCESS" });
+
+      console.debug(
+        `[${this.type}] '${this.id}' authenticated (socket ${this.connection.rid})`
+      );
 
       return;
     }
