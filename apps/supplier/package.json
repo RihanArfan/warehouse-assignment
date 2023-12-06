@@ -13,14 +13,14 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.4",
-    "@tauri-apps/cli": "^1.5.6",
+    "@tauri-apps/cli": "^1.5.7",
     "eslint-config-client": "workspace:*",
     "nuxt": "^3.8.2",
     "types": "workspace:*",
-    "vue": "^3.3.9",
+    "vue": "^3.3.10",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@vueuse/integrations": "^10.6.1"
+    "@vueuse/integrations": "^10.7.0"
   }
 }
