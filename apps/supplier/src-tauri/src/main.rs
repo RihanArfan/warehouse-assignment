@@ -15,6 +15,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            auth,
             create_broadcast,
             create_product,
             edit_product,
@@ -24,6 +25,19 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+#[tauri::command]
+fn auth(email: String, password: String) {
+    let payload = json!({
+        "action": "AUTH",
+        "payload": {
+            "email": email,
+            "password": password,
+        }
+    });
+
+    println!("Payload: {}", payload);
 }
 
 #[tauri::command]

@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import { getName } from "@tauri-apps/api/app";
+
 interface Props {
   title?: string;
-  icon?: string;
   fullscreen?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: "Application",
-  fullscreen: false,
-});
+const props = withDefaults(defineProps<Props>(), { fullscreen: false });
+
+const appName = props.title ?? (await getName()) ?? "Application";
 
 const containerPadding = computed(() => {
   if (props.fullscreen) {
@@ -24,7 +24,7 @@ const containerPadding = computed(() => {
     <Body class="overscroll-none" />
 
     <TitleBar
-      :title="title"
+      :title="appName"
       :class="{
         'border-b border-b-[#e5e5e5]': !$slots.sidebar,
       }"

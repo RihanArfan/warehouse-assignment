@@ -32,16 +32,12 @@ defineShortcuts({
 });
 
 const broadcasts = useBroadcasts();
-useNotifications();
 </script>
 
 <template>
   <div>
-    <NuxtLayout
-      name="default"
-      title="Supplier Portal"
-      :fullscreen="$route.meta.fullscreen"
-    >
+    <NuxtPage v-if="$route.path === '/login'" />
+    <NuxtLayout v-else name="default" :fullscreen="$route.meta.fullscreen">
       <template #sidebar>
         <UVerticalNavigation
           :links="links"

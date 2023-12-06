@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "customer",
+    "productName": "Customer Portal",
     "version": "0.1.0"
   },
   "tauri": {

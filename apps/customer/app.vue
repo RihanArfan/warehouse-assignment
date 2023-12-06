@@ -15,11 +15,8 @@ defineShortcuts({
   <div>
     <NuxtLoadingIndicator />
 
-    <NuxtLayout
-      name="default"
-      title="Customer Portal"
-      :fullscreen="$route.meta.fullscreen"
-    >
+    <NuxtPage v-if="$route.path === '/login'" />
+    <NuxtLayout v-else name="default" :fullscreen="$route.meta.fullscreen">
       <template #title-bar>
         <div class="flex justify-between pl-0" data-tauri-drag-region>
           <UButton

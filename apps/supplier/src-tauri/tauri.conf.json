@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "supplier",
+    "productName": "Supplier Portal",
     "version": "0.1.0"
   },
   "tauri": {
