@@ -70,6 +70,15 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
 const { results } = useFuse(search, variantsSorted, options);
 
 const isSubscribed = ref(false);
+
+const toggleSubscribe = () => {
+  isSubscribed.value = !isSubscribed.value;
+
+  const action = isSubscribed.value
+    ? "subscribe_product"
+    : "unsubscribe_product";
+  useInvoke(action, { productId: product.value.id });
+};
 </script>
 
 <template>
@@ -114,7 +123,7 @@ const isSubscribed = ref(false);
           icon="i-fluent-alert-16-regular"
           label="Subscribe to updates"
           :ui="{ padding: { sm: 'pr-4 pl-3' } }"
-          @click="isSubscribed = !isSubscribed"
+          @click="toggleSubscribe"
         />
         <UButton
           v-else
@@ -123,7 +132,7 @@ const isSubscribed = ref(false);
           icon="i-fluent-checkmark-16-regular"
           label="Subscribed to updates"
           :ui="{ padding: { sm: 'pr-4 pl-3' } }"
-          @click="isSubscribed = !isSubscribed"
+          @click="toggleSubscribe"
         />
       </div>
     </div>

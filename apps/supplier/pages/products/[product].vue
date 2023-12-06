@@ -200,7 +200,7 @@ const isNewVariantOpen = ref(false);
     </div>
 
     <LazyProductEditModal v-model="isEditOpen" :product="product" />
-    <LazyProductVariantNewModal v-model="isNewVariantOpen" />
+    <LazyProductVariantNewModal v-model="isNewVariantOpen" :product-id="product.id" />
 
     <NuxtPage />
   </div>
