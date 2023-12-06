@@ -3,7 +3,7 @@ import type { Product } from "types";
 
 const isOpen = defineModel<boolean>();
 
-// pick id, name, icon.name
+// pick id, name, icon
 const props = defineProps<{
   product: Pick<Product, "id" | "name" | "icon">;
 }>();
@@ -11,7 +11,7 @@ const props = defineProps<{
 const form = reactive({
   id: props.product.id,
   name: props.product.name,
-  icon: props.product.icon.name,
+  icon: props.product.icon,
 });
 </script>
 

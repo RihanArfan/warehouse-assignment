@@ -5,10 +5,7 @@ export const useProducts = () => {
     {
       id: "TSHIRT",
       name: "T-Shirt",
-      icon: {
-        name: "i-fluent-emoji-t-shirt",
-        colour: "#83dc8a",
-      },
+      icon: "i-fluent-emoji-t-shirt",
       variants: [
         {
           sku: "TSHIRT-RED-S",
@@ -70,10 +67,7 @@ export const useProducts = () => {
     {
       id: "SHORTS",
       name: "Shorts",
-      icon: {
-        name: "i-fluent-emoji-shorts",
-        colour: "#4ee297",
-      },
+      icon: "i-fluent-emoji-shorts",
       variants: [
         {
           sku: "SHORTS-RED-S",
@@ -135,10 +129,7 @@ export const useProducts = () => {
     {
       id: "COAT",
       name: "Coat",
-      icon: {
-        name: "i-fluent-emoji-coat",
-        colour: "#f0c592",
-      },
+      icon: "i-fluent-emoji-coat",
       variants: [
         {
           sku: "COAT-ORANGE-S",

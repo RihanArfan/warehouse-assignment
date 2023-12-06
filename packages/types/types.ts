@@ -1,10 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  icon: {
-    name: string;
-    colour: string;
-  };
+  icon: string;
   variants: ProductVariant[];
 }
 

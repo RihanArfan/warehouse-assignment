@@ -112,7 +112,7 @@ const isNewProductOpen = ref(false);
         v-for="result in results"
         :key="result.item.id"
         :name="result.item.name"
-        :icon="{ name: result.item.icon.name }"
+        :icon="{ name: result.item.icon }"
       >
         <div class="flex gap-2 items-center basis-1/2">
           <UIcon name="i-fluent-receipt-cube-24-regular" />

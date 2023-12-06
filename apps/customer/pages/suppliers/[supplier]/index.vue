@@ -146,7 +146,7 @@ const { results } = useFuse(search, productsSorted, options);
         :key="result.item.id"
         :name="result.item.name"
         :icon="{
-          name: result.item.icon.name,
+          name: result.item.icon,
         }"
       >
         <div class="flex gap-2 items-center basis-1/3">

@@ -77,7 +77,7 @@ const isSubscribed = ref(false);
     <div class="flex justify-between items-center">
       <div class="flex justify-stretch items-center gap-10 grow">
         <div class="bg-gray-200/50 rounded-lg p-4 w-44 text-center">
-          <UIcon :name="product.icon.name" class="text-9xl" />
+          <UIcon :name="product.icon" class="text-9xl" />
         </div>
 
         <div>
@@ -167,7 +167,7 @@ const isSubscribed = ref(false);
         :name="result.item.sku"
         :is-name-code="true"
         :icon="{
-          name: product.icon.name,
+          name: product.icon,
           backgroundColour: result.item.colour,
         }"
       >
