@@ -16,9 +16,16 @@ export class BaseHandler {
   }
 
   disconnect() {
-    console.log(`[${this.type}] client disconnected (${this.connection.rid})`);
+    console.debug(
+      `[${this.type}] disconnected (socket ${this.connection.rid})`
+    );
     unstoreConnection(this.id, this.connection, "supplier");
-    this.connection.close();
+
+    try {
+      this.connection?.close();
+    } catch (error) {
+      // ignore
+    }
   }
 
   async readLine(): Promise<string> {
@@ -27,10 +34,10 @@ export class BaseHandler {
         const buf = new Uint8Array(1024);
         const n = await this.connection.read(buf);
         if (n === null) return resolve("");
-        return new TextDecoder().decode(buf.subarray(0, n)).trim();
+        resolve(new TextDecoder().decode(buf.subarray(0, n)).trim());
       } catch (e) {
         this.disconnect();
-        throw new Error("client disconnected");
+        reject("client disconnected");
       }
     });
   }
@@ -61,10 +68,11 @@ export class BaseHandler {
     while (true) {
       // read line from connection
       const line = await this.readLine().catch((error) => {
-        if (error.message === "client disconnected") return "close";
+        if (error === "client disconnected") return "client disconnected";
+        throw error;
       });
       if (!line) continue; // empty line
-      if (line === "close") return; // connection closed
+      if (line === "client disconnected") return; // connection closed
 
       // parse payload
       const rq = await this.parsePayload(line).catch((error) => undefined);

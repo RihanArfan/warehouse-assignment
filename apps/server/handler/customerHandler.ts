@@ -11,10 +11,11 @@ class CustomerHandler extends BaseHandler {
     while (true) {
       // read line from connection
       const line = await this.readLine().catch((error) => {
-        if (error.message === "client disconnected") return "close";
+        if (error === "client disconnected") return "client disconnected";
+        throw error;
       });
       if (!line) continue; // empty line
-      if (line === "close") return; // connection closed
+      if (line === "client disconnected") return; // connection closed
 
       // parse payload
       const rq = await this.parsePayload(line).catch((error) => undefined);
