@@ -4,14 +4,6 @@ const suppliers = useSuppliers();
 
 <template>
   <div>
-    <div class="mb-5">
-      <h1
-        class="font-semibold text-3xl select-auto mb-2 flex items-center gap-2"
-      >
-        Home
-      </h1>
-    </div>
-
     <div>
       <h1 class="font-semibold text-2xl select-auto mb-2">Suppliers</h1>
       <h2>View your suppliers, along with their products and broadcasts</h2>
