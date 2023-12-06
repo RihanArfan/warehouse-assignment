@@ -32,12 +32,11 @@ defineShortcuts({
 });
 
 const broadcasts = useBroadcasts();
+useNotifications();
 </script>
 
 <template>
   <div>
-    <NuxtLoadingIndicator />
-
     <NuxtLayout
       name="default"
       title="Supplier Portal"
