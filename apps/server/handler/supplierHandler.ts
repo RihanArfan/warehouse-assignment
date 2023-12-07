@@ -81,15 +81,6 @@ class SupplierHandler extends BaseHandler {
         }
 
         /**
-         * GET_MESSAGES
-         * Returns a list of messages of the supplier
-         */
-        case "GET_MESSAGES": {
-          // TODO: implement
-          break;
-        }
-
-        /**
          * CREATE_BROADCAST
          * Sends a broadcast to all customers
          */
