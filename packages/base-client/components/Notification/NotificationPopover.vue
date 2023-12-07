@@ -8,17 +8,22 @@ withDefaults(defineProps<Props>(), {
   title: "Alerts",
   icon: "i-fluent-alert-16-regular",
 });
+
+const isUnreadAlerts = useIsUnreadAlerts();
 </script>
 
 <template>
   <UPopover :popper="{ arrow: true }">
     <slot name="button">
-      <UButton
-        color="white"
-        size="md"
-        :icon="icon"
-        :ui="{ rounded: 'rounded-full' }"
-      />
+      <UChip inset :show="isUnreadAlerts">
+        <UButton
+          color="white"
+          size="md"
+          :icon="icon"
+          :ui="{ rounded: 'rounded-full' }"
+          @click="isUnreadAlerts = false"
+        />
+      </UChip>
     </slot>
     <template #panel>
       <UCard

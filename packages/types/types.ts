@@ -45,6 +45,15 @@ export interface User {
   password: string;
 }
 
+export interface Alert {
+  date: string;
+  icon: string;
+  type: string;
+  message: string;
+  supplierId?: string;
+  rawMessage?: string;
+}
+
 type BaseResponse = { code: string };
 export type ErrorResponse = BaseResponse & { message: string; errors?: any };
 export type SuccessResponse<T> = BaseResponse & { data?: T };

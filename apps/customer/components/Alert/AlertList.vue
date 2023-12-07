@@ -1,24 +1,21 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const alerts = useAlerts();
+const alertsReversed = computed(() => [...alerts.value].reverse());
+</script>
 
 <template>
   <div class="flex flex-col max-w-xs max-h-56 overflow-y-auto">
-    <div class="rounded hover:bg-gray-100/50 px-3 py-2">
-      <h2 class="text-gray-500 text-xs flex gap-1 items-center mb-0.5">
-        <UIcon name="i-fluent-megaphone-16-filled" /> Broadcast • 3 days ago
-      </h2>
-
-      <p class="text-sm">
-        Clothes: We will be closed on the following bank holiday.
-      </p>
+    <div
+      v-if="!alerts.length"
+      class="items-center justify-center flex w-80 h-56"
+    >
+      No new notifications
     </div>
 
-    <div class="rounded hover:bg-gray-100/50 px-3 py-2">
-      <h2 class="text-gray-500 text-xs flex gap-1 items-center mb-0.5">
-        <UIcon name="i-fluent-arrow-trending-down-16-filled" /> Stock update • 3
-        days ago
-      </h2>
-
-      <p class="text-sm">Clothes: T-Shirt has low stock</p>
-    </div>
+    <AlertListItem
+      v-for="alert in alertsReversed"
+      v-bind="alert"
+      :key="alert.date"
+    />
   </div>
 </template>

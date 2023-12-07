@@ -2,7 +2,11 @@ import "https://deno.land/std@0.208.0/dotenv/load.ts";
 
 import { handler as customerHandler } from "./handler/customerHandler.ts";
 import { handler as supplierHandler } from "./handler/supplierHandler.ts";
-import { heartbeat } from "./server/subscriptions.ts";
+import {
+  heartbeat,
+  scheduledAlerts,
+  scheduledProductUpdates,
+} from "./server/subscriptions.ts";
 
 console.log("server starting...");
 
@@ -27,10 +31,10 @@ async function startSupplierServer() {
   }
 }
 
-async function startHeartbeat() {
-  heartbeat();
-}
-
-Promise.all([startCustomerServer(), startSupplierServer(), startHeartbeat()]);
-
-// TODO(rihan.arfan): cron ./server/subscriptions.ts
+Promise.all([
+  startCustomerServer(),
+  startSupplierServer(),
+  heartbeat(),
+  scheduledAlerts(),
+  scheduledProductUpdates(),
+]);
