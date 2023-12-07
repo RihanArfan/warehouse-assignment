@@ -1,7 +1,9 @@
 import {
   authenticate,
   storeConnection,
+  storeUnauthenticatedConnection,
   unstoreConnection,
+  unstoreUnauthenticatedConnection,
 } from "../server/authentication.ts";
 import * as payloads from "../server/payloads.ts";
 import type { Payload, Response } from "../server/types.ts";
@@ -13,12 +15,20 @@ export class BaseHandler {
   constructor(protected connection: Deno.Conn, type: "supplier" | "customer") {
     this.type = type;
     console.debug(`[${type}] new connection (socket ${connection.rid})`);
+
+    storeUnauthenticatedConnection(connection);
+
+    this.send({
+      code: "WELCOME",
+      message: "welcome to the server",
+    });
   }
 
   disconnect() {
     console.debug(
       `[${this.type}] disconnected (socket ${this.connection.rid})`
     );
+    unstoreUnauthenticatedConnection(this.connection);
     unstoreConnection(this.id, this.connection, "supplier");
 
     try {
@@ -34,7 +44,13 @@ export class BaseHandler {
         const buf = new Uint8Array(1024);
         const n = await this.connection.read(buf);
         if (n === null) return resolve("");
-        resolve(new TextDecoder().decode(buf.subarray(0, n)).trim());
+
+        const message = new TextDecoder().decode(buf.subarray(0, n)).trim();
+        console.debug(
+          `[${this.type}] received '${message}' - socket (${this.connection.rid})`
+        );
+
+        resolve(message);
       } catch (e) {
         this.disconnect();
         reject("client disconnected");
@@ -45,6 +61,11 @@ export class BaseHandler {
   async send(response: Response) {
     const textEncoder = new TextEncoder();
     const string = JSON.stringify(response);
+
+    console.debug(
+      `[${this.type}] sending '${string}' - socket (${this.connection.rid})`
+    );
+
     await this.connection.write(textEncoder.encode(string));
   }
 
@@ -115,6 +136,7 @@ export class BaseHandler {
       }
 
       this.id = item.id;
+      unstoreUnauthenticatedConnection(this.connection);
       storeConnection(this.id, this.connection, this.type);
       await this.send({ code: "AUTH_SUCCESS" });
 

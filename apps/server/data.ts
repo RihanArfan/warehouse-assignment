@@ -288,4 +288,6 @@ const customers: Customer[] = [
   },
 ];
 
-export { suppliers, customers };
+const unauthenticatedSockets: Deno.Conn[] = [];
+
+export { suppliers, customers, unauthenticatedSockets };

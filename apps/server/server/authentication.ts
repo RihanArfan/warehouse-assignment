@@ -1,4 +1,4 @@
-import { customers, suppliers } from "../data.ts";
+import { customers, suppliers, unauthenticatedSockets } from "../data.ts";
 import type { Customer, Supplier } from "./types.ts";
 import { verify } from "https://deno.land/x/scrypt@v4.2.1/mod.ts";
 
@@ -38,6 +38,17 @@ export function authenticate<T extends TypeName>(
   if (!isVerified) return false;
 
   return item as ObjectType<T>;
+}
+
+export function storeUnauthenticatedConnection(conn: Deno.Conn) {
+  unauthenticatedSockets.push(conn);
+}
+
+export function unstoreUnauthenticatedConnection(conn: Deno.Conn) {
+  unauthenticatedSockets.splice(
+    unauthenticatedSockets.findIndex((c) => c === conn),
+    1
+  );
 }
 
 /**
