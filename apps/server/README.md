@@ -22,6 +22,12 @@ pnpm run compile
 ./server.exe
 ```
 
+## Testing
+
+```bash
+deno test
+```
+
 ## Documentation
 
 Documentation for the system

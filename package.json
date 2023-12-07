@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "author": "Rihan Arfan",
   "scripts": {
-    "dev": "pnpm run --parallel dev"
+    "dev": "pnpm run --parallel dev",
+    "test": "pnpm run --parallel test"
   }
 }

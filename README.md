@@ -43,3 +43,9 @@ Run the development script:
 ```bash
 pnpm run dev
 ```
+
+## Testing
+
+```bash
+pnpm run test
+```

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "deno run --allow-read --allow-net --allow-env --unstable --watch main.ts",
     "start": "deno run --allow-read --allow-net --allow-env --unstable main.ts",
-    "compile": "deno compile --allow-read --allow-net --allow-env --unstable --output server main.ts"
+    "compile": "deno compile --allow-read --allow-net --allow-env --unstable --output server main.ts",
+    "test": "deno test"
   }
 }
