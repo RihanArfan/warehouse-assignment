@@ -2,7 +2,7 @@ import { type } from "npm:arktype";
 
 // universal
 export const auth = type({
-  username: "string",
+  email: "string",
   password: "string",
 });
 

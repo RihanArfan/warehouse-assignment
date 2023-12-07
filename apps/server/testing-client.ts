@@ -28,7 +28,7 @@ readResponse();
 const authPayload = {
   action: "AUTH",
   payload: {
-    username: "johndoe@supplier-a.example.com",
+    email: "johndoe@supplier-a.example.com",
     password: "password",
   },
 };

@@ -30,7 +30,7 @@ async fn socketHandler(app: AppHandle, rx: mpsc::Receiver<String>) {
     let mut stream = TcpStream::connect("localhost:5555").unwrap();
 
     loop {
-        let mut buf = [0; 1024];
+        let mut buf = [0; 51200];
 
         // check if there's a payload in the channel
         if let Ok(payload) = rx.try_recv() {
@@ -78,6 +78,8 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             auth,
+            get_broadcasts,
+            get_products,
             create_broadcast,
             create_product,
             edit_product,

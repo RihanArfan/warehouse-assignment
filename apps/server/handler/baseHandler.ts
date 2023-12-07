@@ -41,7 +41,7 @@ export class BaseHandler {
   async readLine(): Promise<string> {
     return new Promise(async (resolve, reject) => {
       try {
-        const buf = new Uint8Array(1024);
+        const buf = new Uint8Array(51200);
         const n = await this.connection.read(buf);
         if (n === null) return resolve("");
 
@@ -125,8 +125,8 @@ export class BaseHandler {
       }
 
       // authentication
-      const { username, password } = data;
-      const item = authenticate(username, password, this.type);
+      const { email, password } = data;
+      const item = authenticate(email, password, this.type);
       if (!item) {
         await this.send({
           code: "AUTH_FAILED",
