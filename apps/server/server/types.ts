@@ -4,6 +4,8 @@ import type {
   Response,
   SuccessResponse,
   Alert,
+  Conversation,
+  Message,
 } from "../../../packages/types/types.ts";
 
 type Customer = BaseCustomer & {
@@ -19,4 +21,13 @@ type Payload<T> = {
   payload?: T;
 };
 
-export type { Customer, Supplier, Payload, Response, SuccessResponse, Alert };
+export type {
+  Customer,
+  Supplier,
+  Payload,
+  Response,
+  SuccessResponse,
+  Alert,
+  Conversation,
+  Message,
+};

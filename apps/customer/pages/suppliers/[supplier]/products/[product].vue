@@ -69,7 +69,7 @@ const options = computed<UseFuseOptions<ProductVariant>>(() => ({
 
 const { results } = useFuse(search, variantsSorted, options);
 
-const isSubscribed = ref(false);
+const isSubscribed = ref(product.value.isSubscribed);
 
 const toggleSubscribe = () => {
   isSubscribed.value = !isSubscribed.value;

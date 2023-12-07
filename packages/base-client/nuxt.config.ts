@@ -35,6 +35,10 @@ export default defineNuxtConfig({
         defineModel: true,
       },
     },
+
+    optimizeDeps: {
+      disabled: "dev",
+    },
   },
 
   experimental: {

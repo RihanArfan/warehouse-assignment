@@ -12,7 +12,7 @@ const appName = props.title ?? (await getName()) ?? "Application";
 
 const containerPadding = computed(() => {
   if (props.fullscreen) {
-    return "p-0 lg:px-0";
+    return "p-0 sm:px-0 lg:px-0";
   }
 
   return "p-5 sm:py-6 lg:px-10 sm:px-6 sm:pr-3 lg:pr-7";

@@ -1,7 +1,7 @@
 import { BaseHandler } from "./baseHandler.ts";
-import { customers, suppliers } from "../data.ts";
+import { conversations, customers, suppliers } from "../data.ts";
 import * as payloads from "../server/payloads.ts";
-import { Supplier } from "../server/types.ts";
+import { Message, SuccessResponse, Supplier } from "../server/types.ts";
 
 class CustomerHandler extends BaseHandler {
   constructor(connection: Deno.Conn) {
@@ -56,6 +56,20 @@ class CustomerHandler extends BaseHandler {
         }
 
         /**
+         * GET_SUBSCRIBED_PRODUCTS
+         * Returns a list of subscribed products
+         */
+        case "GET_SUBSCRIBED_PRODUCTS": {
+          const subscribedProducts = this.#getSubscribedProducts();
+
+          await this.send({
+            code: "SUBSCRIBED_PRODUCTS",
+            data: subscribedProducts,
+          });
+          break;
+        }
+
+        /**
          * SUBSCRIBE_PRODUCT
          * Subscribes to a product
          */
@@ -105,11 +119,41 @@ class CustomerHandler extends BaseHandler {
         }
 
         /**
-         * GET_MESSAGES
-         * Returns a list of messages of the supplier
+         * GET_CONVERSATIONS
+         * Returns a list of conversations
          */
-        case "GET_MESSAGES": {
-          // TODO: implement
+        case "GET_CONVERSATIONS": {
+          const conversations = this.#getConversations();
+
+          await this.send({
+            code: "CONVERSATIONS",
+            data: conversations,
+          });
+          break;
+        }
+
+        /**
+         * SEND_MESSAGE
+         * Sends a message to a supplier
+         */
+        case "SEND_MESSAGE": {
+          // validation
+          const { data, problems } = payloads.customerMessage(rq.payload);
+          if (problems?.length || !data) {
+            await this.send({
+              code: "SEND_MESSAGE_FAILED",
+              message: "invalid payload",
+              errors: problems,
+            });
+            continue;
+          }
+
+          this.#sendMessage(data.supplierId, data.message);
+
+          await this.send({
+            code: "SEND_MESSAGE_SUCCESS",
+            message: "message sent",
+          });
           break;
         }
 
@@ -142,6 +186,14 @@ class CustomerHandler extends BaseHandler {
     });
   }
 
+  #getConversations() {
+    return conversations.filter((c) => c.customer === this.id);
+  }
+
+  #getSubscribedProducts() {
+    return this.#getCustomer().subscribedProducts;
+  }
+
   #subscribeProduct(productId: string) {
     this.#getCustomer().subscribedProducts.push(productId);
   }
@@ -151,6 +203,52 @@ class CustomerHandler extends BaseHandler {
       this.#getCustomer().subscribedProducts.filter(
         (id) => id !== productId.toUpperCase()
       );
+  }
+
+  async #sendMessage(supplierId: string, message: string) {
+    const data = {
+      date: new Date().toISOString(),
+      fromCustomer: true,
+      message,
+    };
+
+    const conversation = conversations.find(
+      (c) => c.customer === this.id && c.supplier === supplierId
+    )!;
+
+    // if conversation does not exist, create it
+    if (!conversation) {
+      const customer = this.#getCustomer();
+      const supplier = suppliers.find((c) => c.id === supplierId)!;
+
+      const conversation = {
+        supplier: supplier.id,
+        customer: customer.id,
+        messages: [data],
+      };
+
+      conversations.push(conversation);
+    }
+
+    conversation.messages.push(data);
+
+    // send message to connected supplier clients
+    const supplier = suppliers.find((s) => s.id === supplierId)!;
+    const connections = supplier.connections;
+
+    for (const conn of connections) {
+      const response = JSON.stringify({
+        code: "MESSAGE",
+        data: {
+          date: data.date,
+          customerId: this.id,
+          message: data.message,
+        },
+      });
+
+      const textEncoder = new TextEncoder();
+      await conn.write(textEncoder.encode(response));
+    }
   }
 }
 

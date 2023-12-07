@@ -54,6 +54,17 @@ export interface Alert {
   rawMessage?: string;
 }
 
+export interface Message {
+  date: string;
+  fromCustomer: boolean;
+  message: string;
+}
+export interface Conversation {
+  supplier: string;
+  customer: string;
+  messages: Message[];
+}
+
 type BaseResponse = { code: string };
 export type ErrorResponse = BaseResponse & { message: string; errors?: any };
 export type SuccessResponse<T> = BaseResponse & { data?: T };

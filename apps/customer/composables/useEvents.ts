@@ -1,12 +1,19 @@
-import type { SuccessResponse } from "types";
+import type { Conversation, SuccessResponse } from "types";
 
 export const useEvents = async () => {
   const toast = useToast();
 
   const suppliers = useSuppliers();
+  const subscribedProducts = useSubscribedProducts();
   const alerts = useAlerts();
+  const conversations = useState<Conversation[]>("conversations", () => []);
+
   const isUnreadAlert = useState<boolean>("is-alert-unread", () => false);
   const isDebug = useState<boolean>("is-debug", () => true);
+  const unreadConversations = useState<string[]>(
+    "unread-conversations",
+    () => []
+  );
 
   await useListen<string>("server", ({ payload }) => {
     const response = JSON.parse(payload) as SuccessResponse<any>;
@@ -20,10 +27,20 @@ export const useEvents = async () => {
     switch (response.code) {
       case "AUTH_SUCCESS":
         useInvoke("get_suppliers");
+        useInvoke("get_subscribed_products");
+        useInvoke("get_conversations");
         break;
 
       case "SUPPLIERS":
         suppliers.value = response.data;
+        break;
+
+      case "CONVERSATIONS":
+        conversations.value = response.data;
+        break;
+
+      case "SUBSCRIBED_PRODUCT":
+        subscribedProducts.value = response.data;
         break;
 
       case "SUBSCRIBE_PRODUCT_SUCCESS":
@@ -62,6 +79,20 @@ export const useEvents = async () => {
         alerts.value.push(response.data);
 
         break;
+      }
+
+      case "MESSAGE": {
+        const conversation = useConversation(response.data.supplierId);
+
+        if (!conversation.value) return useInvoke("get_conversations");
+
+        conversation.value.messages.push({
+          date: response.data.date,
+          message: response.data.message,
+          fromCustomer: false,
+        });
+
+        unreadConversations.value.push(response.data.supplierId);
       }
     }
   });

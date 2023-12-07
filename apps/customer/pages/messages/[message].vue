@@ -4,7 +4,7 @@ import type { FormError } from "#ui/types";
 const route = useRoute("messages-message");
 
 const conversation = useConversation(route.params.message);
-const customer = useCustomer(conversation.value!.customer);
+const supplier = useSupplier(conversation.value!.supplier);
 
 const state = reactive({ message: "" });
 
@@ -17,14 +17,14 @@ const validate = (state: any): FormError[] => {
 
 async function onSubmit() {
   useInvoke("send_message", {
-    customerId: route.params.message,
+    supplierId: route.params.message,
     message: state.message?.trim(),
   });
 
   conversation.value!.messages.push({
     date: new Date().toISOString(),
     message: state.message,
-    fromCustomer: false,
+    fromCustomer: true,
   });
 
   state.message = "";
@@ -37,8 +37,8 @@ async function onSubmit() {
       <div v-for="message in conversation!.messages" :key="message.date">
         <div class="flex gap-3">
           <UAvatar
-            v-if="message.fromCustomer"
-            :alt="customer.name"
+            v-if="!message.fromCustomer"
+            :alt="supplier.name"
             size="md"
             :ui="{ background: 'bg-gray-200/75' }"
           />
@@ -51,8 +51,8 @@ async function onSubmit() {
           <div
             class="rounded p-3"
             :class="{
-              'bg-gray-300/40': message.fromCustomer,
-              'bg-blue-100': !message.fromCustomer,
+              'bg-gray-300/40': !message.fromCustomer,
+              'bg-blue-100': message.fromCustomer,
             }"
           >
             <p class="text-sm text-gray-600 font-medium">

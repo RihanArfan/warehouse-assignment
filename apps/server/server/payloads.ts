@@ -6,6 +6,16 @@ export const auth = type({
   password: "string",
 });
 
+export const customerMessage = type({
+  supplierId: "string",
+  message: "string",
+});
+
+export const supplierMessage = type({
+  customerId: "string",
+  message: "string",
+});
+
 // suppliers
 export const broadcast = type({
   message: "string",

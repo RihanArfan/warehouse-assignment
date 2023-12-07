@@ -1,5 +1,5 @@
 import { BaseHandler } from "./baseHandler.ts";
-import { customers, suppliers } from "../data.ts";
+import { conversations, customers, suppliers } from "../data.ts";
 import * as payloads from "../server/payloads.ts";
 import type {
   Broadcast,
@@ -259,6 +259,45 @@ class SupplierHandler extends BaseHandler {
         }
 
         /**
+         * GET_CONVERSATIONS
+         * Returns a list of conversations
+         */
+        case "GET_CONVERSATIONS": {
+          const conversations = this.#getConversations();
+
+          await this.send({
+            code: "CONVERSATIONS",
+            data: conversations,
+          });
+          break;
+        }
+
+        /**
+         * SEND_MESSAGE
+         * Sends a message to a supplier
+         */
+        case "SEND_MESSAGE": {
+          // validation
+          const { data, problems } = payloads.supplierMessage(rq.payload);
+          if (problems?.length || !data) {
+            await this.send({
+              code: "SEND_MESSAGE_FAILED",
+              message: "invalid payload",
+              errors: problems,
+            });
+            continue;
+          }
+
+          this.#sendMessage(data.customerId, data.message);
+
+          await this.send({
+            code: "SEND_MESSAGE_SUCCESS",
+            message: "message sent",
+          });
+          break;
+        }
+
+        /**
          * Unknown command
          * Returns an error response
          */
@@ -299,6 +338,10 @@ class SupplierHandler extends BaseHandler {
     return customers.filter((c) => c.suppliers.includes(this.id));
   }
 
+  #getConversations() {
+    return conversations.filter((c) => c.supplier === this.id);
+  }
+
   /**
    * Creates a broadcast
    */
@@ -319,7 +362,7 @@ class SupplierHandler extends BaseHandler {
   /**
    * Send broadcat to all connected customers
    */
-  #sendBroadcast(broadcast: Broadcast) {
+  async #sendBroadcast(broadcast: Broadcast) {
     const connections = this.#getCustomers().flatMap((c) => c.connections);
 
     for (const conn of connections) {
@@ -332,10 +375,13 @@ class SupplierHandler extends BaseHandler {
         supplierId: this.id,
       };
 
-      this.send({
+      const response = JSON.stringify({
         code: "BROADCAST",
         data,
       });
+
+      const textEncoder = new TextEncoder();
+      await conn.write(textEncoder.encode(response));
     }
   }
 
@@ -424,6 +470,54 @@ class SupplierHandler extends BaseHandler {
     variants.splice(variantIndex, 1);
 
     return true;
+  }
+
+  async #sendMessage(customerId: string, message: string) {
+    const data = {
+      date: new Date().toISOString(),
+      fromCustomer: false,
+      message,
+    };
+
+    const conversation = conversations.find(
+      (c) =>
+        c.supplier === this.id &&
+        c.customer.toLowerCase() === customerId.toLowerCase()
+    )!;
+
+    // if conversation does not exist, create it
+    if (!conversation) {
+      const customer = customers.find((c) => c.id === customerId)!;
+      const supplier = this.#getSupplier();
+
+      const conversation = {
+        supplier: supplier.id,
+        customer: customer.id,
+        messages: [data],
+      };
+
+      conversations.push(conversation);
+    }
+
+    conversation.messages.push(data);
+
+    // send message to connected customer clients
+    const customer = customers.find((s) => s.id === customerId)!;
+    const connections = customer.connections;
+
+    for (const conn of connections) {
+      const response = JSON.stringify({
+        code: "MESSAGE",
+        data: {
+          date: data.date,
+          supplierId: this.id,
+          message: data.message,
+        },
+      });
+
+      const textEncoder = new TextEncoder();
+      await conn.write(textEncoder.encode(response));
+    }
   }
 }
 

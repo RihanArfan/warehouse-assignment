@@ -26,7 +26,7 @@ struct Payload {
     data: serde_json::Value,
 }
 
-async fn socketHandler(app: AppHandle, rx: mpsc::Receiver<String>) {
+async fn socket_handler(app: AppHandle, rx: mpsc::Receiver<String>) {
     let mut stream = TcpStream::connect("localhost:5555").unwrap();
 
     loop {
@@ -72,7 +72,7 @@ fn main() {
             *TX.lock().unwrap() = Some(tx);
 
             let app_handle = app.handle();
-            tauri::async_runtime::spawn(async move { socketHandler(app_handle, rx).await });
+            tauri::async_runtime::spawn(async move { socket_handler(app_handle, rx).await });
 
             Ok(())
         })
@@ -80,6 +80,7 @@ fn main() {
             auth,
             get_broadcasts,
             get_products,
+            get_customers,
             create_broadcast,
             create_product,
             edit_product,
@@ -87,6 +88,7 @@ fn main() {
             edit_variant,
             delete_product,
             delete_variant,
+            get_conversations,
             send_message
         ])
         .run(tauri::generate_context!())
@@ -124,6 +126,18 @@ fn get_broadcasts() {
 fn get_products() {
     let payload = json!({
         "action": "GET_PRODUCTS",
+        "payload": {}
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_customers() {
+    let payload = json!({
+        "action": "GET_CUSTOMERS",
         "payload": {}
     });
 
@@ -231,6 +245,18 @@ fn delete_variant(sku: String) {
         "payload": {
             "sku": sku
         }
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_conversations() {
+    let payload = json!({
+        "action": "GET_CONVERSATIONS",
+        "payload": {}
     });
 
     let tx = TX.lock().unwrap();

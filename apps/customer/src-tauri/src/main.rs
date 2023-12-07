@@ -26,7 +26,7 @@ struct Payload {
     data: serde_json::Value,
 }
 
-async fn socketHandler(app: AppHandle, rx: mpsc::Receiver<String>) {
+async fn socket_handler(app: AppHandle, rx: mpsc::Receiver<String>) {
     let mut stream = TcpStream::connect("localhost:4444").unwrap();
 
     loop {
@@ -72,15 +72,18 @@ fn main() {
             *TX.lock().unwrap() = Some(tx);
 
             let app_handle = app.handle();
-            tauri::async_runtime::spawn(async move { socketHandler(app_handle, rx).await });
+            tauri::async_runtime::spawn(async move { socket_handler(app_handle, rx).await });
 
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             auth,
             get_suppliers,
+            get_subscribed_products,
             subscribe_product,
-            unsubscribe_product
+            unsubscribe_product,
+            get_conversations,
+            send_message
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -101,11 +104,22 @@ fn auth(email: String, password: String) {
     tx.send(payload.to_string()).unwrap();
 }
 
-// get_suppliers
 #[tauri::command]
 fn get_suppliers() {
     let payload = json!({
         "action": "GET_SUPPLIERS",
+        "payload": {}
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_subscribed_products() {
+    let payload = json!({
+        "action": "GET_SUBSCRIBED_PRODUCTS",
         "payload": {}
     });
 
@@ -134,6 +148,33 @@ fn unsubscribe_product(product_id: String) {
         "action": "UNSUBSCRIBE_PRODUCT",
         "payload": {
             "productId": product_id,
+        }
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_conversations() {
+    let payload = json!({
+        "action": "GET_CONVERSATIONS",
+        "payload": {}
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn send_message(supplier_id: String, message: String) {
+    let payload = json!({
+        "action": "SEND_MESSAGE",
+        "payload": {
+            "supplierId": supplier_id,
+            "message": message,
         }
     });
 

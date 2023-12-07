@@ -19,13 +19,13 @@ const supplierServer = Deno.listen({ port: SUPPLIER_PORT });
 console.info(`[customer] socket bound to localhost:${CUSTOMER_PORT}`);
 console.info(`[supplier] socket bound to localhost:${SUPPLIER_PORT}`);
 
-async function startCustomerServer() {
+export async function startCustomerServer() {
   for await (const conn of customerServer) {
     customerHandler(conn);
   }
 }
 
-async function startSupplierServer() {
+export async function startSupplierServer() {
   for await (const conn of supplierServer) {
     supplierHandler(conn);
   }

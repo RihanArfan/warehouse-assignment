@@ -11,6 +11,8 @@ defineShortcuts({
 });
 
 useEvents();
+
+const isUnreadAlerts = useIsUnreadAlerts();
 </script>
 
 <template>
@@ -51,9 +53,21 @@ useEvents();
               @click.stop.prevent="isCommandPaletteOpen = true"
             />
 
-            <NotificationPopover class="ml-5">
+            <NotificationPopover class="ml-3">
               <AlertList />
             </NotificationPopover>
+
+            <RouterLink to="/messages">
+              <UChip inset :show="isUnreadAlerts" class="-ml-5">
+                <UButton
+                  color="white"
+                  size="md"
+                  icon="i-fluent-chat-16-regular"
+                  :ui="{ rounded: 'rounded-full' }"
+                  @click="isUnreadAlerts = false"
+                />
+              </UChip>
+            </RouterLink>
           </div>
         </div>
       </template>

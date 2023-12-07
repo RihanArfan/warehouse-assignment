@@ -4,7 +4,6 @@ import type { Conversation } from "types";
 definePageMeta({ fullscreen: true });
 
 const conversations = useState<Conversation[]>("conversations", () => []);
-const customers = useCustomers();
 
 const conversationsWithMessages = computed(() =>
   conversations.value.map((conversation) => ({
@@ -21,16 +20,14 @@ const unreadConversations = useState<string[]>(
 
 const recentMessages = computed(() => {
   const messages = conversationsWithMessages.value.map((conversation) => {
-    const customer = customers.value.find(
-      (c) => c.id === conversation.customer
-    )!;
-    const name = customer?.name;
+    const supplier = useSupplier(conversation.supplier);
+    const name = supplier?.value.name;
 
-    const isUnread = unreadConversations.value.includes(customer.id);
+    const isUnread = unreadConversations.value.includes(supplier.value.id);
 
     return {
-      customerId: conversation.customer,
-      customerName: name,
+      supplierId: conversation.supplier,
+      supplierName: name,
       latestMessage: conversation.latest_message,
       isUnread,
     };
@@ -50,31 +47,31 @@ const isNewConversationOpen = ref(false);
       >
         <h1 class="font-semibold text-2xl select-auto">Messages</h1>
 
-        <UButton
+        <!-- <UButton
           icon="i-fluent-compose-24-filled"
           size="md"
           :ui="{ rounded: 'rounded-full' }"
           @click="isNewConversationOpen = true"
-        />
+        /> -->
       </div>
 
       <div class="flex flex-col px-2">
         <NuxtLink
           v-for="message in recentMessages"
-          :key="message.customerId"
+          :key="message.supplierId"
           class="flex items-center gap-3 rounded-lg p-3 hover:bg-gray-100"
           active-class="bg-gray-300/30"
-          :to="`/messages/${message.customerId}`"
+          :to="`/messages/${message.supplierId}`"
         >
           <UAvatar
             size="md"
-            :alt="message.customerName"
+            :alt="message.supplierName"
             :ui="{
               background: 'bg-gray-300/50',
             }"
           />
           <div class="flex flex-col justify-center gap-1 min-w-0">
-            <h2 class="font-semibold text-md">{{ message.customerName }}</h2>
+            <h2 class="font-semibold text-md">{{ message.supplierName }}</h2>
             <p class="text-sm truncate text-gray-500">
               {{ message.latestMessage }}
             </p>
@@ -96,7 +93,5 @@ const isNewConversationOpen = ref(false);
 
       <NuxtPage />
     </div>
-
-    <NewMessageModal v-model="isNewConversationOpen" />
   </div>
 </template>

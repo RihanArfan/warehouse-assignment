@@ -1,4 +1,4 @@
-import type { Customer, Supplier } from "./server/types.ts";
+import type { Customer, Supplier, Conversation } from "./server/types.ts";
 
 const suppliers: Supplier[] = [
   {
@@ -277,8 +277,99 @@ const customers: Customer[] = [
 
     connections: [],
   },
+  {
+    id: "company-b",
+    name: "Company B",
+    users: [
+      {
+        name: "Ben Smith",
+        email: "bensmith@company-b.example.com",
+        password:
+          "c2NyeXB0AA4AAAAIAAAAARVFFMDPQLTetP1RQaCW5cApwh78uL82eyFk9ZHvUH3kQ7e4G+G6PMkchc5767i6FaEzHrbUwWpdZKBWTPmekuHDxVWYQp01YJDl6764ZoEo",
+      },
+    ],
+    suppliers: [suppliers[0].id, suppliers[1].id],
+
+    subscribedProducts: [],
+
+    connections: [],
+  },
+];
+
+const conversations: Conversation[] = [
+  {
+    supplier: suppliers[0].id,
+    customer: customers[0].id,
+
+    messages: [
+      {
+        date: "2023-11-01T10:00:00",
+        fromCustomer: true,
+        message: "I'm interested in COAT-ORANGE-S",
+      },
+      {
+        date: "2023-11-02T10:00:00",
+        fromCustomer: false,
+        message: "Perfect, we have 10 in stock",
+      },
+    ],
+  },
+  {
+    supplier: suppliers[0].id,
+    customer: customers[1].id,
+
+    messages: [
+      {
+        date: "2023-11-01T10:00:00",
+        fromCustomer: true,
+        message: "I'm interested in COAT-BLUE-M",
+      },
+      {
+        date: "2023-11-02T10:00:00",
+        fromCustomer: false,
+        message: "Would you like express delivery?",
+      },
+      {
+        date: "2023-11-03T10:00:00",
+        fromCustomer: true,
+        message: "Yes please",
+      },
+      {
+        date: "2023-11-04T10:00:00",
+        fromCustomer: false,
+        message: "That will be an extra £10",
+      },
+      {
+        date: "2023-11-05T10:00:00",
+        fromCustomer: true,
+        message: "OK",
+      },
+      {
+        date: "2023-11-06T10:00:00",
+        fromCustomer: false,
+        message: "Great, we will send you a confirmation email",
+      },
+    ],
+  },
+  {
+    supplier: suppliers[1].id,
+    customer: customers[0].id,
+
+    messages: [
+      {
+        date: "2023-11-01T10:00:00",
+        fromCustomer: true,
+        message: "When will you be getting stock?",
+      },
+      {
+        date: "2023-11-02T10:00:00",
+        fromCustomer: false,
+        message: "We plan to restock in a few days",
+      },
+    ],
+  },
 ];
 
 const unauthenticatedSockets: Deno.Conn[] = [];
 
-export { suppliers, customers, unauthenticatedSockets };
+export { suppliers, customers, conversations, unauthenticatedSockets };
