@@ -104,7 +104,14 @@ const { results } = useFuse(search, productsSorted, options);
           <BroadcastList :broadcasts="supplier.broadcasts" />
         </NotificationPopover>
 
-        <UButton color="primary" variant="solid" label="Send message" />
+        <NuxtLink
+          :to="{
+            name: 'messages-message',
+            params: { message: supplier.id },
+          }"
+        >
+          <UButton color="primary" variant="solid" label="Send message" />
+        </NuxtLink>
       </div>
     </div>
 

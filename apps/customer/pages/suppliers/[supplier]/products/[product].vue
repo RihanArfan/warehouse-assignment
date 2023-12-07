@@ -196,22 +196,20 @@ const toggleSubscribe = () => {
         </div>
 
         <template #button>
-          <!-- <NuxtLink
+          <NuxtLink
             :to="{
-              name: 'products-product-variants-variant',
-              params: {
-                product: product.id.toLowerCase(),
-                variant: result.item.sku.toLowerCase(),
-              },
+              name: 'messages-message',
+              params: { message: supplier.id },
+              query: { message: `I'm interested in ${result.item.sku}` },
             }"
-          > -->
-          <UButton
-            color="white"
-            variant="solid"
-            label="Inquire"
-            :ui="{ padding: { sm: 'px-8' } }"
-          />
-          <!-- </NuxtLink> -->
+          >
+            <UButton
+              color="white"
+              variant="solid"
+              label="Inquire"
+              :ui="{ padding: { sm: 'px-8' } }"
+            />
+          </NuxtLink>
         </template>
       </ProductListItem>
     </div>

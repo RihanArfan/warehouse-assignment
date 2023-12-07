@@ -6,7 +6,8 @@ const route = useRoute("messages-message");
 const conversation = useConversation(route.params.message);
 const supplier = useSupplier(conversation.value!.supplier);
 
-const state = reactive({ message: "" });
+const defaultMessage = (route.query.message as string) ?? "";
+const state = reactive({ message: defaultMessage });
 
 const validate = (state: any): FormError[] => {
   const errors = [];
