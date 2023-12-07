@@ -6,14 +6,16 @@ export const useEvents = async () => {
   const suppliers = useSuppliers();
   const alerts = useAlerts();
   const isUnreadAlert = useState<boolean>("is-alert-unread", () => false);
+  const isDebug = useState<boolean>("is-debug", () => true);
 
   await useListen<string>("server", ({ payload }) => {
     const response = JSON.parse(payload) as SuccessResponse<any>;
 
-    toast.add({
-      title: "Debug",
-      description: `Received push - ${response.code}`,
-    });
+    if (isDebug.value)
+      toast.add({
+        title: "Debug",
+        description: `Received push - ${response.code}`,
+      });
 
     switch (response.code) {
       case "AUTH_SUCCESS":

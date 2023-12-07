@@ -1,5 +1,6 @@
 <script setup>
 const commandPaletteRef = ref();
+const isDebug = useIsDebug();
 
 const customers = [
   {
@@ -10,7 +11,16 @@ const customers = [
   },
 ];
 
-const actions = [];
+const actions = [
+  {
+    id: "toggle-debug",
+    label: isDebug.value
+      ? "Disable debug notifications"
+      : "Enable debug notifications",
+    icon: "i-fluent-code-block-16-filled",
+    click: () => (isDebug.value = !isDebug.value),
+  },
+];
 
 const groups = computed(() =>
   [
