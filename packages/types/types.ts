@@ -44,3 +44,8 @@ export interface User {
   email: string;
   password: string;
 }
+
+type BaseResponse = { code: string };
+export type ErrorResponse = BaseResponse & { message: string; errors?: any };
+export type SuccessResponse<T> = BaseResponse & { data?: T };
+export type Response<T = any> = ErrorResponse | SuccessResponse<T>;
