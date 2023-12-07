@@ -5,6 +5,7 @@ import type {
   Broadcast,
   Product,
   ProductVariant,
+  Alert,
 } from "../../../packages/types/types.ts";
 
 class SupplierHandler extends BaseHandler {
@@ -322,12 +323,18 @@ class SupplierHandler extends BaseHandler {
     const connections = this.#getCustomers().flatMap((c) => c.connections);
 
     for (const conn of connections) {
+      const data: Alert = {
+        date: broadcast.date,
+        type: "Broadcast",
+        icon: "i-fluent-megaphone-16-filled",
+        message: `${this.#getSupplier().name}: ${broadcast.message}`,
+        rawMessage: broadcast.message,
+        supplierId: this.id,
+      };
+
       this.send({
         code: "BROADCAST",
-        data: {
-          id: this.id,
-          ...broadcast,
-        },
+        data,
       });
     }
   }
@@ -393,7 +400,7 @@ class SupplierHandler extends BaseHandler {
   }
 
   /**
-   * DELETE_PRODUCT
+   * Delete a product
    */
   #deleteProduct(id: string) {
     const products = this.#getProducts();
@@ -406,7 +413,7 @@ class SupplierHandler extends BaseHandler {
   }
 
   /**
-   * DELETE_VARIANT
+   * Delete a variant
    */
   #deleteVariant(sku: string) {
     const products = this.#getProducts();
