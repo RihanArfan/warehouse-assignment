@@ -52,17 +52,39 @@ const validate = (state: any): FormError[] => {
 };
 
 async function onSubmit() {
-  useInvoke("edit_variant", {
-    productId: route.params.product,
-    id: route.params.variant,
+  console.log(state);
+
+  await useInvoke("edit_variant", {
+    sku: route.params.variant.toUpperCase(),
     quantity: state.quantity,
-    colour: state.colour,
+    colour: state.colour.toUpperCase(),
     size: state.size,
   });
 
   variant.value.quantity = state.quantity;
-  variant.value.colour = state.colour;
+  variant.value.colour = state.colour.toUpperCase();
   variant.value.size = state.size;
+
+  isOpen.value = false;
+}
+
+async function onDelete() {
+  await useInvoke("delete_variant", {
+    sku: route.params.variant.toUpperCase(),
+  });
+
+  const products = useProducts();
+  const product = products.value.find(
+    (product) => product.id === route.params.product.toUpperCase()
+  );
+
+  console.log("Product: ", product);
+
+  if (product) {
+    product.variants = product.variants.filter(
+      (variant) => variant.sku !== route.params.variant.toUpperCase()
+    );
+  }
 
   isOpen.value = false;
 }
@@ -123,6 +145,13 @@ async function onSubmit() {
         </div>
 
         <template #footer>
+          <UButton
+            color="red"
+            variant="link"
+            label="Delete"
+            @click="onDelete"
+          />
+
           <UButton
             type="submit"
             color="primary"

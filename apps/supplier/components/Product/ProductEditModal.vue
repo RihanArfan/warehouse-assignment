@@ -30,6 +30,18 @@ async function onSubmit() {
 
   isOpen.value = false;
 }
+
+async function onDelete() {
+  useInvoke("delete_product", {
+    id: props.product.id.toUpperCase(),
+  });
+
+  products.value = products.value.filter(
+    (product) => product.id !== props.product.id.toUpperCase()
+  );
+
+  navigateTo("/products");
+}
 </script>
 
 <template>
@@ -74,6 +86,13 @@ async function onSubmit() {
         </div>
 
         <template #footer>
+          <UButton
+            color="red"
+            variant="link"
+            label="Delete"
+            @click="onDelete"
+          />
+
           <UButton
             type="submit"
             color="primary"

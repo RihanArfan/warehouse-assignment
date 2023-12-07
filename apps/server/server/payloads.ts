@@ -8,8 +8,33 @@ export const auth = type({
 
 // suppliers
 export const broadcast = type({
-  date: "string",
   message: "string",
+});
+
+export const product = type({
+  id: "string",
+  name: "string",
+  icon: "string",
+});
+
+export const deleteProduct = type({
+  id: "string",
+});
+
+export const variant = type({
+  productId: "string",
+  quantity: "number",
+  colour: "string",
+  size: "string",
+});
+
+export const editVariant = type({
+  sku: "string",
+  quantity: "number",
+});
+
+export const deleteVariant = type({
+  sku: "string",
 });
 
 // customers

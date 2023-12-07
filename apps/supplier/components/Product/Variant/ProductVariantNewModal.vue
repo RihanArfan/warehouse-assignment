@@ -49,7 +49,7 @@ async function onSubmit() {
   useInvoke("create_variant", {
     productId: props.productId,
     quantity: parseInt(state.quantity),
-    colour: state.colour,
+    colour: state.colour.toUpperCase(),
     size: state.size,
   });
 
@@ -60,7 +60,9 @@ async function onSubmit() {
 
   if (product) {
     product.variants.push({
-      sku: `${props.productId}-${state.colour}-${state.size}`,
+      sku: `${props.productId.toUpperCase()}-${state.colour.toUpperCase()}-${
+        state.size
+      }`,
       quantity: parseInt(state.quantity),
       colour: state.colour.toUpperCase(),
       // @ts-expect-error

@@ -32,6 +32,7 @@ defineShortcuts({
 });
 
 const broadcasts = useBroadcasts();
+useEvents();
 </script>
 
 <template>

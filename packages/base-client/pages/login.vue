@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormError } from "#ui/types";
+import type { Response } from "types";
 
 const isLoading = ref(false);
 const isAuthenticated = useIsAuthenticated();
@@ -21,22 +22,42 @@ async function onSubmit() {
     password: state.password,
   });
 
-  // wait for success
-  // isAuthenticated.value = true;
-  // navigateTo("/products");
+  await new Promise((resolve) => setTimeout(resolve, 10000));
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  invalidCredentials();
-}
+  if (!isLoading.value) return;
 
-function invalidCredentials() {
-  isLoading.value = false;
+  // show timeout after 10 seconds
   toast.add({
-    title: "Invalid credentials",
-    description: "Please enter valid credentials",
+    title: "Timeout",
+    description: "Please try again later",
     color: "red",
   });
+
+  isLoading.value = false;
 }
+
+const unlisten = await useListen<string>("server", ({ payload }) => {
+  const response = JSON.parse(payload) as Response;
+
+  switch (response.code) {
+    case "AUTH_SUCCESS":
+      isAuthenticated.value = true;
+      navigateTo("/products");
+      break;
+
+    case "AUTH_FAILED":
+      toast.add({
+        title: "Invalid credentials",
+        description: "Please enter valid credentials",
+        color: "red",
+      });
+      break;
+  }
+
+  isLoading.value = false;
+});
+
+onUnmounted(async () => unlisten());
 </script>
 
 <template>
@@ -55,7 +76,9 @@ function invalidCredentials() {
               <UFormGroup label="Email" name="email">
                 <UInput
                   v-model="state.email"
+                  type="email"
                   placeholder="example@example.com"
+                  autocomplete="off"
                 />
               </UFormGroup>
 
@@ -64,6 +87,7 @@ function invalidCredentials() {
                   v-model="state.password"
                   type="password"
                   placeholder="••••••••••••••"
+                  autocomplete="off"
                 />
               </UFormGroup>
             </div>

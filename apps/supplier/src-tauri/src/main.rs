@@ -85,6 +85,8 @@ fn main() {
             edit_product,
             create_variant,
             edit_variant,
+            delete_product,
+            delete_variant,
             send_message
         ])
         .run(tauri::generate_context!())
@@ -99,6 +101,30 @@ fn auth(email: String, password: String) {
             "email": email,
             "password": password,
         }
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_broadcasts() {
+    let payload = json!({
+        "action": "GET_BROADCASTS",
+        "payload": {}
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn get_products() {
+    let payload = json!({
+        "action": "GET_PRODUCTS",
+        "payload": {}
     });
 
     let tx = TX.lock().unwrap();
@@ -170,15 +196,40 @@ fn create_variant(product_id: String, size: String, colour: String, quantity: i3
 }
 
 #[tauri::command]
-fn edit_variant(product_id: String, id: String, size: String, colour: String, quantity: String) {
+fn edit_variant(sku: String, quantity: i32) {
     let payload = json!({
         "action": "EDIT_VARIANT",
         "payload": {
-            "productId": product_id,
-            "id": id,
-            "size": size,
-            "colour": colour,
+            "sku": sku,
             "quantity": quantity
+        }
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn delete_product(id: String) {
+    let payload = json!({
+        "action": "DELETE_PRODUCT",
+        "payload": {
+            "id": id
+        }
+    });
+
+    let tx = TX.lock().unwrap();
+    let tx = tx.as_ref().unwrap();
+    tx.send(payload.to_string()).unwrap();
+}
+
+#[tauri::command]
+fn delete_variant(sku: String) {
+    let payload = json!({
+        "action": "DELETE_VARIANT",
+        "payload": {
+            "sku": sku
         }
     });
 
