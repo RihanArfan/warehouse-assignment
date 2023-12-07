@@ -42,7 +42,7 @@ const unlisten = await useListen<string>("server", ({ payload }) => {
   switch (response.code) {
     case "AUTH_SUCCESS":
       isAuthenticated.value = true;
-      navigateTo("/products");
+      navigateTo("/");
       break;
 
     case "AUTH_FAILED":

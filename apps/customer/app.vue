@@ -9,6 +9,8 @@ defineShortcuts({
     },
   },
 });
+
+useEvents();
 </script>
 
 <template>

@@ -9,14 +9,14 @@ definePageMeta({
     // @ts-expect-error
     const supplier = useSupplier(route.params.supplier);
     // @ts-expect-error
-    const product = useProduct(route.params.product);
+    const product = useProduct(route.params.supplier, route.params.product);
     return !!supplier.value && !!product.value;
   },
 });
 
 const route = useRoute("suppliers-supplier-products-product");
 const supplier = useSupplier(route.params.supplier);
-const product = useProduct(route.params.product);
+const product = useProduct(route.params.supplier, route.params.product);
 
 const colours = computed(() => {
   const colours = product.value?.variants.map((variant) => variant.colour);

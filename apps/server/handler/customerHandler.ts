@@ -1,6 +1,7 @@
 import { BaseHandler } from "./baseHandler.ts";
 import { customers, suppliers } from "../data.ts";
 import * as payloads from "../server/payloads.ts";
+import { Supplier } from "../server/types.ts";
 
 class CustomerHandler extends BaseHandler {
   constructor(connection: Deno.Conn) {
@@ -29,6 +30,15 @@ class CustomerHandler extends BaseHandler {
         case "BYE_BYE": {
           await this.send({ code: "BYE_BYE", message: "👋" });
           return this.disconnect();
+        }
+
+        /**
+         * AUTH
+         * Already authenticated if this code is reached
+         */
+        case "AUTH": {
+          await this.send({ code: "AUTH_SUCCESS" });
+          break;
         }
 
         /**
@@ -71,6 +81,30 @@ class CustomerHandler extends BaseHandler {
         }
 
         /**
+         * UNSUBSCRIBE_PRODUCT
+         * Unsubscribes from a product
+         */
+        case "UNSUBSCRIBE_PRODUCT": {
+          // validation
+          const { data, problems } = payloads.subscribeProduct(rq.payload);
+          if (problems?.length || !data) {
+            await this.send({
+              code: "UNSUBSCRIBE_PRODUCT_FAILED",
+              message: "invalid payload",
+              errors: problems,
+            });
+            continue;
+          }
+
+          this.#unsubscribeProduct(data.productId);
+          await this.send({
+            code: "UNSUBSCRIBE_PRODUCT_SUCCESS",
+            message: "unsubscribed from product",
+          });
+          break;
+        }
+
+        /**
          * GET_MESSAGES
          * Returns a list of messages of the supplier
          */
@@ -100,12 +134,23 @@ class CustomerHandler extends BaseHandler {
 
   #getSuppliers() {
     return this.#getCustomer().suppliers.map((id) => {
-      return suppliers.find((s) => s.id === id);
+      const supplier = suppliers.find((s) => s.id === id)!;
+
+      // exclude users and connections
+      const { users, connections, ...rest } = supplier;
+      return rest;
     });
   }
 
   #subscribeProduct(productId: string) {
     this.#getCustomer().subscribedProducts.push(productId);
+  }
+
+  #unsubscribeProduct(productId: string) {
+    this.#getCustomer().subscribedProducts =
+      this.#getCustomer().subscribedProducts.filter(
+        (id) => id !== productId.toUpperCase()
+      );
   }
 }
 
